@@ -10,5 +10,6 @@
 *= require webjars/bootstrap/%/dist/css/bootstrap.css
 *= require webjars/bootstrap-icons/%/font/bootstrap-icons.css
 *= require grails.css
+*= require registro
 *= require_self
 */

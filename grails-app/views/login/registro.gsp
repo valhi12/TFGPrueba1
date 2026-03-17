@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="layout" content="main"/>
+    <title>Registro - Mi TFG</title>
+</head>
+<body>
+    <div class="card-registro">
+        <h2 style="text-align: center; color: #333;">Crea tu cuenta</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 20px;">Únete al círculo de cuidado</p>
+        
+        <g:form action="guardarRegistro">
+            <label>Nombre Completo</label>
+            <input type="text" name="nombre" class="form-control" placeholder="Tu nombre y apellidos" required/>
+            
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" placeholder="ejemplo@correo.com" required/>
+            
+            <label>Contraseña</label>
+            <input type="password" name="password" class="form-control" placeholder="Mínimo 6 caracteres" required/>
+            
+            <hr style="margin: 25px 0;">
+            
+            <h5 style="margin-bottom: 15px;">¿Cómo vas a usar la app?</h5>
+            
+            <div class="opcion-registro">
+                <label style="cursor: pointer; width: 100%; margin: 0; display: block;">
+                    <input type="radio" name="tipoRegistro" value="CUIDADOR" checked 
+                           onclick="document.getElementById('divCodigo').classList.add('hidden')"> 
+                    <strong style="margin-left: 10px;">Soy Cuidador</strong>
+                    <p style="margin-left: 25px; font-size: 0.85em; color: #777;">Crearé un nuevo círculo para un paciente.</p>
+                </label>
+            </div>
+
+            <div class="opcion-registro">
+                <label style="cursor: pointer; width: 100%; margin: 0; display: block;">
+                    <input type="radio" name="tipoRegistro" value="FAMILIAR" 
+                           onclick="document.getElementById('divCodigo').classList.remove('hidden')"> 
+                    <strong style="margin-left: 10px;">Soy Familiar</strong>
+                    <p style="margin-left: 25px; font-size: 0.85em; color: #777;">Tengo un código para unirme a un grupo existente.</p>
+                </label>
+            </div>
+
+            <div id="divCodigo" class="hidden" style="margin-top: 15px; background: #fff9e6; padding: 15px; border-radius: 8px;">
+                <label>Introduce el Código Familiar</label>
+                <input type="text" name="codigo" class="form-control" placeholder="Ej: ABC-123"/>
+            </div>
+
+            <div style="margin-top: 25px; font-size: 0.9em;">
+                <label style="cursor: pointer;">
+                    <input type="checkbox" required> Acepto los términos y la política de privacidad.
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 20px; padding: 10px; font-size: 1.1em;">
+                Finalizar Registro
+            </button>
+        </g:form>
+    </div>
+</body>
+</html>
