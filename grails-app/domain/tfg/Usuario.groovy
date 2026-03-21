@@ -13,6 +13,6 @@ class Usuario {
     }
 
     static mapping = {
-        password column: '`password`' // Se ponen comillas porque "password" es palabra reservada en MySQL
+        password column: '`password`' 
     }
 }
