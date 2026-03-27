@@ -93,7 +93,7 @@ hibernate:
 
 dataSource:
     dbCreate: update
-    url: jdbc:mysql://localhost:3307/tfg_db
+    url: jdbc:mysql://localhost:3307/tfg_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
     username: root
     password: admin
     driverClassName: com.mysql.cj.jdbc.Driver
