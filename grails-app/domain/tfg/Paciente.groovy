@@ -1,12 +1,19 @@
 package tfg
+
 class Paciente {
     String nombre
-    String codigoUnico // El código que usará la familia
-    String datosMedicos
+    String dni
+    Date fechaNacimiento
+    String codigoUnico
 
     static constraints = {
         nombre blank: false
-        codigoUnico unique: true
-        datosMedicos nullable: true, maxSize: 1000
+        dni blank: false, unique: true
+        fechaNacimiento nullable: true
+        codigoUnico nullable: true, unique: true
+    }
+
+    static mapping = {
+        codigoUnico column: 'codigo_unico'
     }
 }

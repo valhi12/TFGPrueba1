@@ -5,8 +5,6 @@ grails:
         defaultPackage: tfg
     gorm:
         reactor:
-            # Whether to translate GORM events into Reactor events
-            # Disabled by default for performance reasons
             events: false
 info:
     app:
@@ -101,7 +99,6 @@ dataSource:
 
 environments:
     development:
-        # Configuración de base de datos heredada de la sección global (MySQL Docker)
         management:
             endpoints:
                 enabled-by-default: true
@@ -134,4 +131,4 @@ environments:
                 testWhileIdle: true
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
-                defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+                defaultTransactionIsolation: 2
