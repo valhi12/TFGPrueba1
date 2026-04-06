@@ -1,0 +1,506 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap');
+
+:root {
+    --verde-pastel: #a8c5a0;
+    --verde-claro: #c8dfc4;
+    --verde-suave: #e8f2e6;
+    --crema: #faf8f4;
+    --marron-suave: #6b5e52;
+    --gris-texto: #4a4a4a;
+    --blanco-roto: #fdfdfa;
+    --sombra: 0 4px 24px rgba(100, 130, 100, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--crema);
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(168, 197, 160, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(200, 223, 196, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at 60% 80%, rgba(168, 197, 160, 0.1) 0%, transparent 40%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar-login {
+    background-color: var(--verde-pastel);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(100, 130, 100, 0.15);
+}
+
+.navbar-login .marca {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: var(--blanco-roto);
+    letter-spacing: 0.3px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.login-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* CARD */
+.login-card {
+    background: var(--blanco-roto);
+    border-radius: 20px;
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(168, 197, 160, 0.3);
+    animation: aparece 0.5s ease;
+}
+
+@keyframes aparece {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+.login-card h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.7rem;
+    color: var(--marron-suave);
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.login-card .subtitulo {
+    text-align: center;
+    color: #9b9088;
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+}
+
+/* LABELS E INPUTS */
+.login-card label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--marron-suave);
+    margin-bottom: 6px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.login-card input[type="email"],
+.login-card input[type="password"],
+.login-card input[type="text"] {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1.5px solid #dde8db;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gris-texto);
+    background: var(--verde-suave);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    outline: none;
+}
+
+.login-card input:focus {
+    border-color: var(--verde-pastel);
+    box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
+    background: #fff;
+}
+
+/* BOTÓN PRINCIPAL */
+.btn-verde {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--verde-pastel);
+    color: var(--blanco-roto);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 4px;
+}
+
+.btn-verde:hover {
+    background-color: #96b58e;
+    transform: translateY(-1px);
+}
+
+.btn-verde:active {
+    transform: translateY(0);
+}
+
+/* DIVISOR */
+.divisor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+    color: #ccc;
+    font-size: 0.85rem;
+}
+
+.divisor::before,
+.divisor::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e8e2db;
+}
+
+/* ENLACE REGISTRO */
+.texto-registro {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #9b9088;
+}
+
+.texto-registro a {
+    color: var(--verde-pastel);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.texto-registro a:hover {
+    color: #7aaa72;
+}
+
+/* ERROR */
+.alerta-error {
+    background: #fdecea;
+    color: #c0392b;
+    border: 1px solid #f5c6c2;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    margin-bottom: 20px;
+}
+
+/* FOOTER */
+.footer-login {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.8rem;
+    color: #bbb;
+}
+
+
+/* ===== CARD REGISTRO ===== */
+.card-registro {
+    background: var(--blanco-roto);
+    border-radius: 20px;
+    padding: 48px 44px;
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(168, 197, 160, 0.3);
+    animation: aparece 0.5s ease;
+}
+
+.card-registro h2 {
+    font-family: 'Lora', serif;
+    color: var(--marron-suave);
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.card-registro .subtitulo {
+    text-align: center;
+    color: #9b9088;
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+}
+
+.card-registro label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--marron-suave);
+    margin-bottom: 6px;
+    margin-top: 14px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.card-registro input[type="text"],
+.card-registro input[type="email"],
+.card-registro input[type="password"] {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1.5px solid #dde8db;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gris-texto);
+    background: var(--verde-suave);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.card-registro input:focus {
+    border-color: var(--verde-pastel);
+    box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
+    background: #fff;
+}
+
+.card-registro .opcion-registro {
+    border: 1.5px solid #dde8db;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    background: var(--verde-suave);
+    transition: border-color 0.2s;
+    cursor: pointer;
+}
+
+.card-registro .opcion-registro:hover {
+    border-color: var(--verde-pastel);
+}
+
+.card-registro hr {
+    border: none;
+    border-top: 1px solid #e8e2db;
+    margin: 24px 0;
+}
+
+.card-registro .alerta-error {
+    background: #fdecea;
+    color: #c0392b;
+    border: 1px solid #f5c6c2;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    margin-bottom: 16px;
+}
+
+.card-registro .error-campo {
+    color: #c0392b;
+    font-size: 0.82rem;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    display: none;
+}
+
+.card-registro .div-codigo {
+    margin-top: 15px;
+    background: var(--verde-suave);
+    border: 1.5px solid #dde8db;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.card-registro .terminos {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--gris-texto);
+}
+
+.card-registro .acciones {
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.btn-secundario {
+    padding: 10px 18px;
+    background: transparent;
+    color: var(--marron-suave);
+    border: 1.5px solid #dde8db;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-secundario:hover {
+    border-color: var(--verde-pastel);
+    color: var(--verde-pastel);
+}
+
+.btn-primario {
+    padding: 10px 24px;
+    background-color: var(--verde-pastel);
+    color: var(--blanco-roto);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-primario:hover {
+    background-color: #96b58e;
+    transform: translateY(-1px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ===== REGISTRO WIDE ===== */
+.registro-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.card-registro-wide {
+    background: var(--blanco-roto);
+    border-radius: 20px;
+    padding: 52px 56px;
+    width: 100%;
+    max-width: 780px;
+    box-shadow: var(--sombra);
+    border: 1px solid rgba(168, 197, 160, 0.3);
+    animation: aparece 0.5s ease;
+}
+
+.registro-header {
+    margin-bottom: 36px;
+    border-bottom: 1px solid #e8e2db;
+    padding-bottom: 24px;
+}
+
+.registro-header h2 {
+    font-family: 'Lora', serif;
+    font-size: 1.9rem;
+    color: var(--marron-suave);
+    margin-bottom: 4px;
+}
+
+.registro-header .subtitulo {
+    color: #9b9088;
+    font-size: 0.9rem;
+}
+
+.registro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 32px;
+    margin-bottom: 32px;
+}
+
+.campo label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--marron-suave);
+    margin-bottom: 6px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.campo input {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1.5px solid #dde8db;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gris-texto);
+    background: var(--verde-suave);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.campo input:focus {
+    border-color: var(--verde-pastel);
+    box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
+    background: #fff;
+}
+
+.registro-seccion {
+    margin-bottom: 32px;
+}
+
+.seccion-titulo {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--marron-suave);
+    margin-bottom: 14px;
+}
+
+.opciones-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.registro-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e8e2db;
+    padding-top: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.terminos {
+    font-size: 0.88rem;
+    color: var(--gris-texto);
+}
+
+
+.div-codigo {
+    margin-top: 16px;
+    background: var(--verde-suave);
+    border: 1.5px solid #dde8db;
+    padding: 16px 20px;
+    border-radius: 10px;
+}
+
+.div-codigo label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--marron-suave);
+    margin-bottom: 8px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.div-codigo input {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1.5px solid #dde8db;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gris-texto);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.div-codigo input:focus {
+    border-color: var(--verde-pastel);
+    box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
+}
