@@ -14,7 +14,9 @@
         <span class="marca">Mi Álbum de Recuerdos</span>
         <g:if test="${session.usuario}">
             <div class="avatar-wrapper">
-                <button class="avatar-btn" onclick="toggleDropdown()">👵🏻</button>
+                <button class="avatar-btn" onclick="toggleDropdown()">
+                    ${session.usuario?.avatar ?: '👤'}
+                </button>
                 <div class="avatar-dropdown" id="avatarDropdown">
                     <div class="nombre-usuario">${session.usuario?.nombreCompleto}</div>
                     <g:link controller="inicio" action="logout">Cerrar sesión</g:link>

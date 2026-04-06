@@ -29,7 +29,7 @@
                     <div class="campo">
                         <label>Nombre Completo</label>
                         <input type="text" name="nombre" id="nombre" placeholder="Tu nombre y apellidos"/>
-                        <div id="errorNombre" class="error-campo"></div>
+                        <div id="errorNombre" class="error-campo">El nombre es obligatorio.</div>
                     </div>
                     <div class="campo">
                         <label>Email</label>
@@ -71,6 +71,36 @@
                     <div id="divCodigo" class="div-codigo hidden">
                         <label>Introduce el Código Familiar</label>
                         <input type="text" id="inputCodigo" name="codigo" placeholder="Ej: ABC-1234"/>
+                    </div>
+                </div>
+
+                <div class="registro-seccion">
+                    <p class="seccion-titulo">Elige tu aspecto</p>
+                    <div class="avatar-selector">
+                        <label class="avatar-opcion">
+                            <input type="radio" name="avatar" value="👴🏻" class="avatar-radio"/>
+                            <span class="avatar-circulo">👴🏻</span>
+                        </label>
+                        <label class="avatar-opcion">
+                            <input type="radio" name="avatar" value="👵🏻" class="avatar-radio"/>
+                            <span class="avatar-circulo">👵🏻</span>
+                        </label>
+                        <label class="avatar-opcion">
+                            <input type="radio" name="avatar" value="👦🏻" class="avatar-radio"/>
+                            <span class="avatar-circulo">👦🏻</span>
+                        </label>
+                        <label class="avatar-opcion">
+                            <input type="radio" name="avatar" value="👧🏻" class="avatar-radio"/>
+                            <span class="avatar-circulo">👧🏻</span>
+                        </label>
+                        <label class="avatar-opcion">
+                            <input type="radio" name="avatar" value="👩🏻" class="avatar-radio" checked/>
+                            <span class="avatar-circulo">👩🏻</span>
+                        </label>
+                        <label class="avatar-opcion">
+                            <input type="radio" name="avatar" value="👨🏻" class="avatar-radio"/>
+                            <span class="avatar-circulo">👨🏻</span>
+                        </label>
                     </div>
                 </div>
 

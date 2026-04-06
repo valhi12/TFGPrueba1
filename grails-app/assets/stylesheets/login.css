@@ -504,3 +504,43 @@ body {
     border-color: var(--verde-pastel);
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
 }
+
+/* ===== SELECTOR AVATAR ===== */
+.avatar-selector {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+
+.avatar-opcion {
+    cursor: pointer;
+}
+
+.avatar-radio {
+    display: none;
+}
+
+.avatar-circulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    font-size: 1.6rem;
+    background: var(--verde-suave);
+    border: 2px solid #dde8db;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+}
+
+.avatar-opcion:hover .avatar-circulo {
+    border-color: var(--verde-pastel);
+    transform: scale(1.08);
+}
+
+.avatar-radio:checked + .avatar-circulo {
+    border-color: var(--verde-pastel);
+    background: var(--verde-claro);
+    box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.3);
+}

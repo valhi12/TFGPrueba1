@@ -37,7 +37,8 @@ class LoginController {
         def user = new Usuario(
             username: params.email,
             password: params.password,
-            nombreCompleto: params.nombre
+            nombreCompleto: params.nombre,
+            avatar: params.avatar ?: '👤'
         )
 
         Usuario.withTransaction {
@@ -64,7 +65,8 @@ class LoginController {
         def user = new Usuario(
             username: params.email,
             password: params.password,
-            nombreCompleto: params.nombre
+            nombreCompleto: params.nombre,
+            avatar: params.avatar ?: '👤'
         )
 
         Usuario.withTransaction {
