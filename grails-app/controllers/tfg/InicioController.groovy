@@ -10,6 +10,17 @@ class InicioController {
         }
         def usuarioRol = UsuarioRol.findByUsuario(usuario)
         def rol = usuarioRol?.rol?.authority ?: 'Sin rol'
+
+        if (rol == 'ROLE_FAMILIAR') {
+            redirect(controller: 'familiar', action: 'bienvenida')
+            return
+        }
+
+        if (rol == 'ROLE_PACIENTE') {
+            redirect(controller: 'paciente', action: 'bienvenida')
+            return
+        }
+
         [usuario: usuario, rol: rol]
     }
 

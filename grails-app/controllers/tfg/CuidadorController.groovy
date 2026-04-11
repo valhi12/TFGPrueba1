@@ -10,7 +10,8 @@ class CuidadorController {
             def usuarioPaciente = new Usuario(
                 username: params.email,
                 password: params.password,
-                nombreCompleto: params.nombre
+                nombreCompleto: params.nombre,
+                avatar: params.avatar ?: '👴🏻'
             ).save(flush: true)
 
             if (!usuarioPaciente || usuarioPaciente.hasErrors()) {

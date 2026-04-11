@@ -36,7 +36,6 @@
                     <p>Este es el espacio donde la familia cuida la memoria. Desde aquí puedes crear el perfil del paciente, invitar a familiares y gestionar los recuerdos que harán que cada día sea un poco más especial.</p>
                 </div>
             </div>
-
             <div class="inicio-grid" style="margin-top:24px;">
                 <div class="inicio-card">
                     <div class="card-icono">👴🏻</div>
@@ -91,98 +90,110 @@
                                 <input type="password" id="password2Paciente" placeholder="Repite la contraseña"/>
                                 <div id="errorPasswordPaciente" class="error-campo"></div>
                             </div>
+                            <div class="campo" style="grid-column: 1 / -1;">
+                                <label>Aspecto del paciente</label>
+                                <div style="display:flex; gap:12px; margin-top:6px;">
+                                    <label class="avatar-opcion">
+                                        <input type="radio" name="avatar" value="👴🏻" class="avatar-radio" checked/>
+                                        <span class="avatar-circulo" style="width:52px; height:52px; font-size:1.6rem;">👴🏻</span>
+                                    </label>
+                                    <label class="avatar-opcion">
+                                        <input type="radio" name="avatar" value="👵🏻" class="avatar-radio"/>
+                                        <span class="avatar-circulo" style="width:52px; height:52px; font-size:1.6rem;">👵🏻</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-acciones">
-                            <button type="button" onclick="validarCrearPaciente()" class="btn-primario">Crear Paciente</button>
+                            <button type="submit" class="btn-primario">Crear Paciente</button>
                         </div>
                     </g:form>
                 </div>
             </div>
 
             <!-- TAB VINCULAR FAMILIAR -->
-                
-                <div id="tab-vincularFamiliar" class="tab-pane">
-                    <div class="form-seccion">
-                        <h4>Vincular nuevo familiar</h4>
+            <div id="tab-vincularFamiliar" class="tab-pane">
+                <div class="form-seccion">
+                    <h4>Vincular nuevo familiar</h4>
 
-                        <g:if test="${flash.codigoGenerado}">
-                            <div class="codigo-generado-box">
-                                <h5>Código generado correctamente</h5>
-                                <div class="codigo-badge">${flash.codigoGenerado}</div>
-                                <p style="font-size:0.88rem; color:#9b9088; margin-bottom:16px;">
-                                    Se enviará a: <strong>${flash.emailFamiliar}</strong>
-                                </p>
-                                <div style="display:flex; gap:12px; margin-top:8px;">
-                                    <button type="button" class="btn-secundario" onclick="mostrarFormulario()">← Volver</button>
-                                    <button type="button" class="btn-primario" onclick="document.getElementById('modalEnviar').classList.add('abierto')">
-                                        Enviar código por correo
-                                    </button>
-                                </div>
+                    <g:if test="${flash.codigoGenerado}">
+                        <div class="codigo-generado-box">
+                            <h5>Código generado correctamente</h5>
+                            <div class="codigo-badge">${flash.codigoGenerado}</div>
+                            <p style="font-size:0.88rem; color:#9b9088; margin-bottom:16px;">
+                                Se enviará a: <strong>${flash.emailFamiliar}</strong>
+                            </p>
+                            <div style="display:flex; gap:12px; margin-top:8px;">
+                                <button type="button" class="btn-secundario" onclick="mostrarFormulario()">← Volver</button>
+                                <button type="button" class="btn-primario" onclick="document.getElementById('modalEnviar').classList.add('abierto')">
+                                    Enviar código por correo
+                                </button>
                             </div>
-
-                            <div class="modal-overlay" id="modalEnviar">
-                                <div class="modal-box">
-                                    <h5>Confirmar envío</h5>
-                                    <p>¿Estás segura de enviar el código <strong>${flash.codigoGenerado}</strong> al correo <strong>${flash.emailFamiliar}</strong>?</p>
-                                    <div class="modal-acciones">
-                                        <button type="button" class="btn-secundario" onclick="document.getElementById('modalEnviar').classList.remove('abierto')">Cancelar</button>
-                                        <g:form controller="cuidador" action="enviarCodigo" id="formEnviarCodigo" style="display:inline;">
-                                            <input type="hidden" name="codigo" value="${flash.codigoGenerado}"/>
-                                            <input type="hidden" name="email" value="${flash.emailFamiliar}"/>
-                                            <input type="hidden" name="nombre" value="${flash.nombreFamiliar}"/>
-                                            <button type="submit" class="btn-primario">Sí, enviar</button>
-                                        </g:form>
-                                    </div>
-                                </div>
-                            </div>
-                        </g:if>
-
-                        <div id="formularioVincular" style="${flash.codigoGenerado ? 'display:none;' : ''}">
-                            <g:form controller="cuidador" action="generarCodigo">
-                                <p class="form-subtitulo">Datos del familiar</p>
-                                <div class="form-grid">
-                                    <div class="campo">
-                                        <label>Nombre completo</label>
-                                        <input type="text" name="nombreFamiliar" placeholder="Nombre y apellidos" required/>
-                                    </div>
-                                    <div class="campo">
-                                        <label>DNI</label>
-                                        <input type="text" name="dniFamiliar" placeholder="Ej: 12345678A" required/>
-                                    </div>
-                                    <div class="campo">
-                                        <label>Email</label>
-                                        <input type="text" name="emailFamiliar" placeholder="ejemplo@gmail.com" required/>
-                                    </div>
-                                    <div class="campo">
-                                        <label>Contraseña</label>
-                                        <input type="password" name="passwordFamiliar" placeholder="Mínimo 6 caracteres" required/>
-                                    </div>
-                                    <div class="campo">
-                                        <label>Repite la contraseña</label>
-                                        <input type="password" name="passwordFamiliar2" placeholder="Repite la contraseña" required/>
-                                    </div>
-                                </div>
-
-                                <hr class="form-separador"/>
-                                <p class="form-subtitulo">Paciente a vincular</p>
-                                <div class="form-grid">
-                                    <div class="campo">
-                                        <label>Nombre completo del paciente</label>
-                                        <input type="text" name="nombrePaciente" placeholder="Nombre y apellidos" required/>
-                                    </div>
-                                    <div class="campo">
-                                        <label>DNI del paciente</label>
-                                        <input type="text" name="dniPaciente" placeholder="Ej: 12345678A" required/>
-                                    </div>
-                                </div>
-
-                                <div class="form-acciones">
-                                    <button type="submit" class="btn-primario">Generar Código</button>
-                                </div>
-                            </g:form>
                         </div>
+
+                        <div class="modal-overlay" id="modalEnviar">
+                            <div class="modal-box">
+                                <h5>Confirmar envío</h5>
+                                <p>¿Estás segura de enviar el código <strong>${flash.codigoGenerado}</strong> al correo <strong>${flash.emailFamiliar}</strong>?</p>
+                                <div class="modal-acciones">
+                                    <button type="button" class="btn-secundario" onclick="document.getElementById('modalEnviar').classList.remove('abierto')">Cancelar</button>
+                                    <g:form controller="cuidador" action="enviarCodigo" id="formEnviarCodigo" style="display:inline;">
+                                        <input type="hidden" name="codigo" value="${flash.codigoGenerado}"/>
+                                        <input type="hidden" name="email" value="${flash.emailFamiliar}"/>
+                                        <input type="hidden" name="nombre" value="${flash.nombreFamiliar}"/>
+                                        <button type="submit" class="btn-primario">Sí, enviar</button>
+                                    </g:form>
+                                </div>
+                            </div>
+                        </div>
+                    </g:if>
+
+                    <div id="formularioVincular" style="${flash.codigoGenerado ? 'display:none;' : ''}">
+                        <g:form controller="cuidador" action="generarCodigo">
+                            <p class="form-subtitulo">Datos del familiar</p>
+                            <div class="form-grid">
+                                <div class="campo">
+                                    <label>Nombre completo</label>
+                                    <input type="text" name="nombreFamiliar" placeholder="Nombre y apellidos" required/>
+                                </div>
+                                <div class="campo">
+                                    <label>DNI</label>
+                                    <input type="text" name="dniFamiliar" placeholder="Ej: 12345678A" required/>
+                                </div>
+                                <div class="campo">
+                                    <label>Email</label>
+                                    <input type="text" name="emailFamiliar" placeholder="ejemplo@gmail.com" required/>
+                                </div>
+                                <div class="campo">
+                                    <label>Contraseña</label>
+                                    <input type="password" name="passwordFamiliar" placeholder="Mínimo 6 caracteres" required/>
+                                </div>
+                                <div class="campo">
+                                    <label>Repite la contraseña</label>
+                                    <input type="password" name="passwordFamiliar2" placeholder="Repite la contraseña" required/>
+                                </div>
+                            </div>
+
+                            <hr class="form-separador"/>
+                            <p class="form-subtitulo">Paciente a vincular</p>
+                            <div class="form-grid">
+                                <div class="campo">
+                                    <label>Nombre completo del paciente</label>
+                                    <input type="text" name="nombrePaciente" placeholder="Nombre y apellidos" required/>
+                                </div>
+                                <div class="campo">
+                                    <label>DNI del paciente</label>
+                                    <input type="text" name="dniPaciente" placeholder="Ej: 12345678A" required/>
+                                </div>
+                            </div>
+
+                            <div class="form-acciones">
+                                <button type="submit" class="btn-primario">Generar Código</button>
+                            </div>
+                        </g:form>
                     </div>
                 </div>
+            </div>
         </g:if>
     </div>
 </div>
@@ -240,50 +251,9 @@
         else if (pass1.length < 6) { errorPass.textContent = 'Mínimo 6 caracteres.'; errorPass.style.display = 'block'; valido = false; }
         else errorPass.style.display = 'none';
 
-        if (valido) document.getElementById('formCrearPaciente').submit();
-    }
-
-    function validarVincularFamiliar() {
-        let valido = true;
-        console.log('Validando...');
-        const regexDni = /^[0-9]{8}[A-Z]$/;
-        const regexEmail = /^[a-zA-Z0-9._%+\-]+@gmail\.com$/;
-
-        const nombre = document.getElementById('nombreFamiliarInput').value.trim();
-        const errorNombre = document.getElementById('errorNombreFamiliar');
-        if (nombre === '') { errorNombre.style.display = 'block'; valido = false; }
-        else errorNombre.style.display = 'none';
-
-        const dni = document.getElementById('dniFamiliarInput').value.trim().toUpperCase();
-        const errorDni = document.getElementById('errorDniFamiliar');
-        if (!regexDni.test(dni)) { errorDni.textContent = 'DNI inválido. Ej: 12345678A'; errorDni.style.display = 'block'; valido = false; }
-        else errorDni.style.display = 'none';
-
-        const email = document.getElementById('emailFamiliarInput').value.trim().toLowerCase();
-        const errorEmail = document.getElementById('errorEmailFamiliar');
-        if (!regexEmail.test(email)) { errorEmail.textContent = 'El email debe ser @gmail.com'; errorEmail.style.display = 'block'; valido = false; }
-        else errorEmail.style.display = 'none';
-
-        const pass1 = document.getElementById('passwordFamiliarInput').value;
-        const pass2 = document.getElementById('password2FamiliarInput').value;
-        const errorPass = document.getElementById('errorPasswordFamiliar');
-        if (pass1 === '' || pass2 === '') { errorPass.textContent = 'Debes rellenar las dos contraseñas.'; errorPass.style.display = 'block'; valido = false; }
-        else if (pass1 !== pass2) { errorPass.textContent = 'Las contraseñas no coinciden.'; errorPass.style.display = 'block'; valido = false; }
-        else if (pass1.length < 6) { errorPass.textContent = 'Mínimo 6 caracteres.'; errorPass.style.display = 'block'; valido = false; }
-        else errorPass.style.display = 'none';
-
-        const nombrePaciente = document.getElementById('nombrePacienteInput').value.trim();
-        const errorNombrePaciente = document.getElementById('errorNombrePacienteVincular');
-        if (nombrePaciente === '') { errorNombrePaciente.style.display = 'block'; valido = false; }
-        else errorNombrePaciente.style.display = 'none';
-
-        const dniPaciente = document.getElementById('dniPacienteInput').value.trim().toUpperCase();
-        const errorDniPaciente = document.getElementById('errorDniPacienteVincular');
-        if (!regexDni.test(dniPaciente)) { errorDniPaciente.textContent = 'DNI inválido. Ej: 12345678A'; errorDniPaciente.style.display = 'block'; valido = false; }
-        else errorDniPaciente.style.display = 'none';
-
-        console.log('Válido:', valido);
-        if (valido) document.getElementById('formVincularFamiliar').submit();
+        if (valido) {
+            document.querySelector('#tab-crearPaciente form').submit();
+        }
     }
 </script>
 </body>

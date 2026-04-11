@@ -6,6 +6,10 @@ grails:
     gorm:
         reactor:
             events: false
+    controllers:
+        upload:
+            maxFileSize: 52428800
+            maxRequestSize: 52428800
 info:
     app:
         name: '@info.app.name@'
@@ -28,6 +32,12 @@ spring:
                 - '**/*.gson'
                 - 'logback-spring.xml'
                 - '*.properties'
+    servlet:
+            multipart:
+                enabled: true
+                max-file-size: 50MB
+                max-request-size: 100MB
+                file-size-threshold: 0
 
 ---
 grails:
@@ -97,8 +107,16 @@ dataSource:
     driverClassName: com.mysql.cj.jdbc.Driver
     dialect: org.hibernate.dialect.MySQL8Dialect
 
+server:
+    tomcat:
+        max-http-form-post-size: -1
+        max-swallow-size: -1
+
 environments:
     development:
+        server:
+            tomcat:
+                max-http-post-size: -1
         management:
             endpoints:
                 enabled-by-default: true

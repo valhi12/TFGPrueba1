@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap');
+
+:root {
+    --verde-pastel: #a8c5a0;
+    --verde-claro: #c8dfc4;
+    --verde-suave: #e8f2e6;
+    --crema: #faf8f4;
+    --marron-suave: #6b5e52;
+    --gris-texto: #4a4a4a;
+    --blanco-roto: #fdfdfa;
+    --sombra: 0 4px 24px rgba(100, 130, 100, 0.12);
+    --borde: rgba(168, 197, 160, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--crema);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--gris-texto);
+}
+
+.paciente-layout {
+    display: flex;
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 40px 32px;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* MENÚ ETIQUETAS */
+.etiquetas-menu {
+    width: 180px;
+    flex-shrink: 0;
+    padding-top: 8px;
+}
+
+.etiquetas-menu h4 {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--marron-suave);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.etiqueta-item {
+    display: block;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    color: var(--gris-texto);
+    text-decoration: none;
+    margin-bottom: 6px;
+    transition: background 0.2s, color 0.2s;
+    border: 1.5px solid transparent;
+}
+
+.etiqueta-item:hover {
+    background: var(--verde-suave);
+    color: var(--marron-suave);
+}
+
+.etiqueta-item.activa {
+    background: var(--verde-suave);
+    border-color: var(--verde-pastel);
+    color: var(--marron-suave);
+    font-weight: 600;
+}
+
+/* CONTENIDO PRINCIPAL */
+.paciente-contenido {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+}
+
+/* PORTADA */
+.portada-card {
+    background: var(--blanco-roto);
+    border: 1px solid var(--borde);
+    border-radius: 24px;
+    box-shadow: var(--sombra);
+    overflow: hidden;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    animation: aparece 0.4s ease;
+}
+
+.portada-card img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+}
+
+.portada-card .portada-info {
+    padding: 28px 32px 32px;
+}
+
+.portada-card h2 {
+    font-family: 'Lora', serif;
+    font-size: 2rem;
+    color: var(--marron-suave);
+    margin-bottom: 10px;
+}
+
+.portada-card p {
+    font-size: 1rem;
+    color: #9b9088;
+    margin-bottom: 24px;
+}
+
+/* VISOR DE TARJETAS */
+.visor-wrapper {
+    width: 100%;
+    max-width: 780px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.visor-navegacion {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-flecha {
+    background: var(--blanco-roto);
+    border: 2px solid var(--borde);
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+}
+
+.btn-flecha:hover {
+    background: var(--verde-suave);
+    border-color: var(--verde-pastel);
+}
+
+.btn-flecha:disabled {
+    visibility: hidden;
+}
+
+/* TARJETA CON FLIP */
+.tarjeta-container {
+    width: 620px;
+    height: 460px;
+    perspective: 1000px;
+}
+
+.tarjeta-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+}
+
+.tarjeta-inner.girada {
+    transform: rotateY(180deg);
+}
+
+.tarjeta-cara {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+}
+
+.tarjeta-frente {
+    background: var(--blanco-roto);
+    border: 1px solid var(--borde);
+}
+
+.tarjeta-frente img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tarjeta-dorso {
+    background: var(--blanco-roto);
+    border: 1px solid var(--borde);
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    text-align: center;
+}
+
+.tarjeta-dorso .descripcion {
+    font-size: 1.5rem;
+    color: var(--gris-texto);
+    line-height: 1.8;
+    font-style: italic;
+    font-family: 'Lora', serif;
+}
+
+.visor-acciones {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.contador {
+    font-size: 1.1rem;
+    color: #9b9088;
+    font-weight: 600;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* BOTONES */
+.btn-verde {
+    background-color: var(--verde-pastel);
+    color: var(--blanco-roto);
+    border: none;
+    border-radius: 12px;
+    padding: 16px 36px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-verde:hover {
+    background-color: #96b58e;
+    transform: translateY(-1px);
+}
+
+.btn-secundario-p {
+    background: transparent;
+    color: var(--marron-suave);
+    border: 2px solid var(--borde);
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    white-space: nowrap;
+}
+
+.btn-secundario-p:hover {
+    border-color: var(--verde-pastel);
+}
+
+.sin-album {
+    text-align: center;
+    padding: 80px 20px;
+    color: #9b9088;
+}
+
+.sin-album .icono {
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.sin-album h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+    color: var(--marron-suave);
+    margin-bottom: 10px;
+}
+
+.sin-album p {
+    font-size: 1rem;
+}
+
+@keyframes aparece {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.footer-app {
+    text-align: center;
+    padding: 16px;
+    font-size: 0.78rem;
+    color: #bbb;
+    border-top: 1px solid var(--borde);
+}

@@ -7,6 +7,8 @@
     <asset:stylesheet src="application.css"/>
     <asset:stylesheet src="login.css"/>
     <asset:stylesheet src="cuidador.css"/>
+    <asset:stylesheet src="familiar.css"/>
+    <asset:stylesheet src="paciente.css"/>
 </head>
 <body>
 
