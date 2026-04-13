@@ -6,12 +6,12 @@ class CuidadorController {
 
     def crearPaciente() {
         Usuario.withTransaction { status ->
-
             def usuarioPaciente = new Usuario(
                 username: params.email,
                 password: params.password,
                 nombreCompleto: params.nombre,
-                avatar: params.avatar ?: '👴🏻'
+                avatar: params.avatar ?: '👴🏻',
+                dni: params.dni // Asegúrate de que tu clase Usuario tenga el campo dni
             ).save(flush: true)
 
             if (!usuarioPaciente || usuarioPaciente.hasErrors()) {
@@ -50,61 +50,20 @@ class CuidadorController {
         }
     }
 
-    def generarCodigo() {
-        Invitacion.withTransaction {
-            def paciente = Paciente.findByNombreAndDni(params.nombrePaciente, params.dniPaciente)
-            if (!paciente) {
-                flash.error = "No se encontró ningún paciente con ese nombre y DNI."
-                redirect(controller: 'inicio', action: 'bienvenida')
-                return
-            }
-
-            def chars = ('A'..'Z') + ('0'..'9')
-            Collections.shuffle(chars)
-            def codigo = (chars.take(3).join('') + '-' + chars.drop(3).take(4).join('')).toUpperCase()
-
-            def invitacion = new Invitacion(
-                codigo: codigo,
-                emailFamiliar: params.emailFamiliar,
-                paciente: paciente
-            ).save(flush: true)
-
-            if (!invitacion || invitacion.hasErrors()) {
-                flash.error = "Error al generar el código."
-                redirect(controller: 'inicio', action: 'bienvenida')
-                return
-            }
-
-            flash.codigoGenerado = codigo
-            flash.emailFamiliar = params.emailFamiliar
-            flash.nombreFamiliar = params.nombreFamiliar
-            redirect(controller: 'inicio', action: 'bienvenida')
-        }
-    }
-
-    def enviarCodigo() {
-        try {
-            correoService.enviarCodigoInvitacion(params.email, params.nombre, params.codigo)
-            flash.message = "Código enviado correctamente a ${params.email}."
-        } catch (Exception e) {
-            flash.error = "Error: ${e.class.name} - ${e.message} - Causa: ${e.cause?.message}"
-        }
-        redirect(controller: 'inicio', action: 'bienvenida')
-    }
-
     def buscarAlbum() {
         def dni = params.dni?.trim()
-        def paciente = Paciente.findByDni(dni)
 
-        if (!nombre || !dni) {
-            flash.errorZip = "Debes introducir el nombre y el DNI del paciente."
+        if (!dni) {
+            flash.errorZip = "Debes introducir el DNI del paciente."
             redirect(controller: 'inicio', action: 'bienvenida')
             return
         }
 
-        def paciente = Paciente.findByNombreAndDni(nombre, dni)
+        // Buscamos SOLO por DNI para evitar el error de "nombre"
+        def paciente = Paciente.findByDni(dni)
+        
         if (!paciente) {
-            flash.errorZip = "No se encontró ningún paciente con ese nombre y DNI."
+            flash.errorZip = "No se encontró ningún paciente con el DNI: ${dni}"
             redirect(controller: 'inicio', action: 'bienvenida')
             return
         }
@@ -129,7 +88,6 @@ class CuidadorController {
         }
 
         def recuerdos = Recuerdo.findAllByAlbum(album).sort { it.fecha }
-
         response.contentType = 'application/zip'
         response.setHeader('Content-Disposition', "attachment; filename=\"album_${album.titulo.replaceAll(' ', '_')}.zip\"")
 
@@ -153,14 +111,9 @@ class CuidadorController {
         def textoEntry = new java.util.zip.ZipEntry("descripciones.txt")
         zipOut.putNextEntry(textoEntry)
         def sb = new StringBuilder()
-        sb.append("ÁLBUM: ${album.titulo}\n")
-        sb.append("Paciente: ${album.paciente.nombre}\n")
-        sb.append("Creado el: ${new java.text.SimpleDateFormat('dd/MM/yyyy').format(album.fechaCreacion)}\n\n")
+        sb.append("ÁLBUM: ${album.titulo}\nPaciente: ${album.paciente.nombre}\n\n")
         recuerdos.eachWithIndex { recuerdo, i ->
-            sb.append("--- Foto ${i+1} ---\n")
-            sb.append("Etiqueta: ${recuerdo.etiqueta ?: 'Sin etiqueta'}\n")
-            sb.append("Fecha: ${recuerdo.fecha ? new java.text.SimpleDateFormat('dd/MM/yyyy').format(recuerdo.fecha) : 'Sin fecha'}\n")
-            sb.append("Descripción: ${recuerdo.texto ?: 'Sin descripción'}\n\n")
+            sb.append("--- Foto ${i+1} ---\nEtiqueta: ${recuerdo.etiqueta}\nDescripción: ${recuerdo.texto ?: ''}\n\n")
         }
         zipOut.write(sb.toString().bytes)
         zipOut.closeEntry()
@@ -171,10 +124,8 @@ class CuidadorController {
 
     def eliminarCuentaPaciente() {
         def dni = params.dni?.trim()
-
-        // Buscamos solo por DNI
         def paciente = Paciente.findByDni(dni)
-        
+
         if (!paciente) {
             flash.errorEliminar = "No se encontró ningún paciente con el DNI: ${dni}"
             redirect(controller: 'inicio', action: 'bienvenida')
@@ -182,58 +133,42 @@ class CuidadorController {
         }
 
         Usuario.withTransaction {
-            // 1. Identificamos al Usuario que tiene el rol de paciente para este perfil
             def vinculos = UsuarioPaciente.findAllByPaciente(paciente)
             def usuarioPaciente = vinculos.find { vp -> 
                 UsuarioRol.findByUsuario(vp.usuario)?.rol?.authority == 'ROLE_PACIENTE' 
             }?.usuario
 
-            // 2. Borramos recuerdos y álbum
             def album = Album.findByPaciente(paciente)
             if (album) {
                 Recuerdo.findAllByAlbum(album).each { it.delete(flush: true) }
                 album.delete(flush: true)
             }
 
-            // 3. Borramos invitaciones
             Invitacion.findAllByPaciente(paciente).each { it.delete(flush: true) }
-
-            // 4. Borramos vínculos en la tabla de unión
             vinculos.each { it.delete(flush: true) }
             
             if (usuarioPaciente) {
                 UsuarioPaciente.findAllByUsuario(usuarioPaciente).each { it.delete(flush: true) }
             }
 
-            // 5. Borramos el perfil del Paciente
             paciente.delete(flush: true)
 
-            // 6. Borramos el Usuario y su Rol
             if (usuarioPaciente) {
                 UsuarioRol.findAllByUsuario(usuarioPaciente).each { it.delete(flush: true) }
                 usuarioPaciente.delete(flush: true)
             }
         }
 
-        flash.message = "Cuenta del paciente con DNI ${dni} eliminada correctamente."
+        flash.message = "Cuenta del paciente eliminada correctamente."
         redirect(controller: 'inicio', action: 'bienvenida')
     }
 
     def eliminarCuentaFamiliar() {
         def dni = params.dni?.trim()
-
-        // Nota: Asegúrate de que tu clase Usuario tenga el campo 'dni'
         def usuario = Usuario.findByDni(dni)
-        
+
         if (!usuario) {
             flash.errorEliminar = "No se encontró ningún usuario con DNI: ${dni}"
-            redirect(controller: 'inicio', action: 'bienvenida')
-            return
-        }
-
-        def roles = UsuarioRol.findAllByUsuario(usuario)
-        if (!roles.any { it.rol.authority == 'ROLE_FAMILIAR' }) {
-            flash.errorEliminar = "El usuario con DNI ${dni} no es un familiar."
             redirect(controller: 'inicio', action: 'bienvenida')
             return
         }
@@ -244,7 +179,7 @@ class CuidadorController {
             usuario.delete(flush: true)
         }
 
-        flash.message = "Cuenta del familiar con DNI ${dni} eliminada correctamente."
+        flash.message = "Cuenta del familiar eliminada correctamente."
         redirect(controller: 'inicio', action: 'bienvenida')
     }
 
@@ -259,25 +194,50 @@ class CuidadorController {
         }
 
         Usuario.withTransaction {
-            def vinculosCuidador = UsuarioPaciente.findAllByUsuario(cuidador)
-            def pacientes = vinculosCuidador.collect { it.paciente }
-            
+            def pacientes = UsuarioPaciente.findAllByUsuario(cuidador).collect { it.paciente }
             pacientes.each { paciente ->
                 def album = Album.findByPaciente(paciente)
                 if (album) {
                     Recuerdo.findAllByAlbum(album).each { it.delete(flush: true) }
                     album.delete(flush: true)
                 }
-                Invitacion.findAllByPaciente(paciente).each { it.delete(flush: true) }
                 UsuarioPaciente.findAllByPaciente(paciente).each { it.delete(flush: true) }
                 paciente.delete(flush: true)
             }
-            
             UsuarioRol.findAllByUsuario(cuidador).each { it.delete(flush: true) }
             cuidador.delete(flush: true)
         }
-
         session.invalidate()
         redirect(controller: 'login', action: 'index')
+    }
+
+    def generarCodigo() {
+        Invitacion.withTransaction {
+            def paciente = Paciente.findByDni(params.dniPaciente)
+            if (!paciente) {
+                flash.error = "No se encontró el paciente con ese DNI."
+                redirect(controller: 'inicio', action: 'bienvenida')
+                return
+            }
+            def chars = ('A'..'Z') + ('0'..'9')
+            Collections.shuffle(chars)
+            def codigo = (chars.take(3).join('') + '-' + chars.drop(3).take(4).join('')).toUpperCase()
+
+            new Invitacion(codigo: codigo, emailFamiliar: params.emailFamiliar, paciente: paciente).save(flush: true)
+            flash.codigoGenerado = codigo
+            flash.emailFamiliar = params.emailFamiliar
+            flash.nombreFamiliar = params.nombreFamiliar
+            redirect(controller: 'inicio', action: 'bienvenida')
+        }
+    }
+
+    def enviarCodigo() {
+        try {
+            correoService.enviarCodigoInvitacion(params.email, params.nombre, params.codigo)
+            flash.message = "Código enviado correctamente."
+        } catch (Exception e) {
+            flash.error = "Error al enviar el correo."
+        }
+        redirect(controller: 'inicio', action: 'bienvenida')
     }
 }
