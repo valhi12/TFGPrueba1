@@ -9,6 +9,10 @@ class PacienteController {
             return
         }
 
+        def usuarioRol = UsuarioRol.findByUsuario(usuario)
+        def rol = usuarioRol?.rol?.authority
+        def esFamiliar = (rol == 'ROLE_FAMILIAR')
+
         def vinculo = UsuarioPaciente.findByUsuario(usuario)
         def paciente = vinculo?.paciente
         def album = paciente ? Album.findByPaciente(paciente) : null
@@ -31,7 +35,8 @@ class PacienteController {
             album: album,
             recuerdos: recuerdosFiltrados,
             etiquetas: etiquetas,
-            etiquetaSeleccionada: etiquetaSeleccionada
+            etiquetaSeleccionada: etiquetaSeleccionada,
+            esFamiliar: esFamiliar
         ]
     }
 

@@ -9,7 +9,7 @@
 <body>
 <div class="app-wrapper">
 
-    <h1 class="bienvenida-titulo">Hola, ${usuario.nombreCompleto} 👋</h1>
+    <h1 class="bienvenida-titulo">Hola, ${usuario.nombreCompleto}</h1>
 
     <g:if test="${flash.message}">
         <div class="alerta-success">${flash.message}</div>
@@ -19,8 +19,8 @@
     </g:if>
 
     <div class="tabs-nav">
-        <button class="tab-btn activo" onclick="cambiarTab('inicio', this)">🏠 Inicio</button>
-        <button class="tab-btn" onclick="cambiarTab('album', this)" id="btnTabAlbum">📖 Álbum</button>
+        <button class="tab-btn activo" onclick="cambiarTab('inicio', this)">Inicio</button>
+        <button class="tab-btn" onclick="cambiarTab('album', this)" id="btnTabAlbum">Álbum</button>
     </div>
 
     <div class="tab-contenido">
@@ -123,8 +123,12 @@
                     <div class="album-portada">
                         <div style="display:flex; align-items:center; gap:20px;">
                             <g:if test="${album.portada}">
-                                <img src="${g.createLink(controller:'familiar', action:'portada', id:album.id)}"
-                                     style="width:80px; height:80px; object-fit:cover; border-radius:12px; border:2px solid rgba(168,197,160,0.3);"/>
+                                <a href="${g.createLink(controller:'paciente', action:'bienvenida')}" title="Ver como lo verá el paciente">
+                                    <img src="${g.createLink(controller:'familiar', action:'portada', id:album.id)}"
+                                        style="width:80px; height:80px; object-fit:cover; border-radius:12px; border:2px solid rgba(168,197,160,0.3); cursor:pointer; transition:transform 0.2s, box-shadow 0.2s;"
+                                        onmouseover="this.style.transform='scale(1.06)'; this.style.boxShadow='0 4px 16px rgba(168,197,160,0.5)'"
+                                        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'"/>
+                                </a>
                             </g:if>
                             <g:else>
                                 <div class="album-portada-icono">📖</div>
@@ -132,15 +136,16 @@
                             <div class="album-portada-info">
                                 <h3>${album.titulo}</h3>
                                 <p>${album.recuerdos?.size() ?: 0} recuerdo(s) · Creado el ${album.fechaCreacion ? new java.text.SimpleDateFormat('dd/MM/yyyy').format(album.fechaCreacion) : ''}</p>
+                                <p style="font-size:0.82rem; color:#a8c5a0; margin-top:6px; font-style:italic;">Pincha en la portada para ver cómo lo verá el paciente</p>
                             </div>
                         </div>
                         <div style="display:flex; gap:10px;">
-                            <button class="btn-lapiz" onclick="mostrarEstado('vistaEditar')">✏️ Editar álbum</button>
+                            <button class="btn-lapiz" onclick="mostrarEstado('vistaEditar')">Editar álbum</button>
                             <g:form controller="familiar" action="eliminarAlbum" style="margin:0;">
                                 <button type="submit" class="btn-lapiz"
                                         style="border-color:#f5c6c2; color:#c0392b; background:#fdecea;"
                                         onclick="return confirm('¿Estás segura de eliminar el álbum completo? Se perderán todos los recuerdos.')">
-                                    🗑️ Eliminar álbum
+                                    Eliminar álbum
                                 </button>
                             </g:form>
                         </div>
@@ -149,7 +154,7 @@
 
                 <div id="vistaEditar" style="display:none;">
                     <div class="form-seccion">
-                        <h4>✏️ Editar álbum</h4>
+                        <h4>Editar álbum</h4>
                         <g:form controller="familiar" action="guardarCambios" enctype="multipart/form-data" id="formEditar">
 
                             <div style="margin-bottom:24px;">
@@ -186,6 +191,7 @@
                                                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#6b5e52;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px;">Fecha</label>
                                                 <input type="date" name="fecha_recuerdo_${recuerdo.id}"
                                                        value="${recuerdo.fecha ? new java.text.SimpleDateFormat('yyyy-MM-dd').format(recuerdo.fecha) : ''}"
+                                                       max="${new java.text.SimpleDateFormat('yyyy-MM-dd').format(new Date())}"
                                                        style="width:100%;padding:10px 14px;border:1.5px solid #dde8db;border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.92rem;background:#e8f2e6;outline:none;"/>
                                             </div>
                                             <div>
@@ -202,14 +208,15 @@
                                             </div>
                                             <div>
                                                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#6b5e52;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px;">Cambiar foto (opcional)</label>
-                                                <input type="file" name="foto_recuerdo_${recuerdo.id}" accept="image/*"
-                                                       style="background:#e8f2e6; padding:6px; border:1.5px solid #dde8db; border-radius:10px; width:100%; font-size:0.85rem;"/>
+                                                <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; background:var(--blanco-roto); border:1.5px solid rgba(168,197,160,0.4); border-radius:10px; padding:8px 14px; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:600; color:#6b5e52;">
+                                                    📷 Cambiar imagen
+                                                    <input type="file" name="foto_recuerdo_${recuerdo.id}" accept="image/*" style="display:none;"/>
+                                                </label>
                                             </div>
                                         </div>
                                         <a href="${g.createLink(controller:'familiar', action:'eliminarRecuerdo', params:[id:recuerdo.id])}"
-                                            style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:#c0392b;padding:4px;flex-shrink:0;align-self:flex-start;text-decoration:none;"
-                                            onclick="return confirm('¿Eliminar este recuerdo?')">🗑️
-                                        </a>
+                                           style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:#c0392b;padding:4px;flex-shrink:0;align-self:flex-start;text-decoration:none;"
+                                           onclick="return confirm('¿Eliminar este recuerdo?')">🗑️</a>
                                     </div>
                                 </g:each>
                             </div>
@@ -236,6 +243,8 @@
 </div>
 
 <script type="text/javascript">
+    var hoy = new Date().toISOString().split('T')[0];
+
     function cambiarTab(nombre, btn) {
         document.querySelectorAll('.tab-pane').forEach(function(p) { p.classList.remove('activo'); });
         document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('activo'); });
@@ -333,7 +342,7 @@
 
         var d2 = document.createElement('div');
         d2.innerHTML = '<label style="display:block;font-size:0.8rem;font-weight:600;color:#6b5e52;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px;">Fecha</label>' +
-            '<input type="date" name="fecha_' + prefijo + indice + '" style="width:100%;padding:10px 14px;border:1.5px solid #dde8db;border-radius:10px;font-family:Nunito,sans-serif;font-size:0.92rem;background:#e8f2e6;outline:none;"/>';
+            '<input type="date" name="fecha_' + prefijo + indice + '" max="' + hoy + '" style="width:100%;padding:10px 14px;border:1.5px solid #dde8db;border-radius:10px;font-family:Nunito,sans-serif;font-size:0.92rem;background:#e8f2e6;outline:none;"/>';
 
         var d3 = document.createElement('div');
         d3.innerHTML = '<label style="display:block;font-size:0.8rem;font-weight:600;color:#6b5e52;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px;">Etiqueta</label>' +
@@ -370,9 +379,8 @@
     }
 
     window.addEventListener('DOMContentLoaded', function() {
-        var tieneAlbum = ${album ? 'true' : 'false'};
         var hayMensaje = ${flash.message ? 'true' : 'false'};
-        if (tieneAlbum || hayMensaje) {
+        if (hayMensaje || window.location.hash === '#album') {
             document.getElementById('btnTabAlbum').click();
         }
     });
