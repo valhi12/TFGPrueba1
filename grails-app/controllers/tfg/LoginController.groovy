@@ -36,7 +36,7 @@ class LoginController {
 
         def user = new Usuario(
             username: params.email,
-            password: params.password,
+            password: new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode(params.password),
             nombreCompleto: params.nombre,
             avatar: params.avatar ?: '👤'
         )
@@ -64,7 +64,7 @@ class LoginController {
     private void registrarCuidador() {
         def user = new Usuario(
             username: params.email,
-            password: params.password,
+            password: new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode(params.password),
             nombreCompleto: params.nombre,
             avatar: params.avatar ?: '👤'
         )
@@ -87,13 +87,16 @@ class LoginController {
     }
 
     def autenticar(String email, String password) {
-        def user = Usuario.findByUsernameAndPassword(email, password)
+        def user = Usuario.findByUsername(email)
         if (user) {
-            session.usuario = user
-            redirect(controller: 'inicio', action: 'bienvenida')
-        } else {
-            flash.error = "Datos incorrectos"
-            redirect(action: 'index')
+            def encoder = new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder()
+            if (encoder.matches(password, user.password)) {
+                session.usuario = user
+                redirect(controller: 'inicio', action: 'bienvenida')
+                return
+            }
         }
+        flash.error = "Datos incorrectos"
+        redirect(action: 'index')
     }
 }

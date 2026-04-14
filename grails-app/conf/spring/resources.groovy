@@ -1,5 +1,6 @@
 import org.springframework.mail.javamail.JavaMailSenderImpl
 import java.util.Properties
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 beans = {
     mailSender(JavaMailSenderImpl) {
@@ -14,5 +15,6 @@ beans = {
             props.put('mail.smtp.starttls.required', 'true')
             return props
         }()
+        passwordEncoder(BCryptPasswordEncoder)
     }
 }

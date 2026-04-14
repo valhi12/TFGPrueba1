@@ -2,6 +2,7 @@ package tfg
 
 class Usuario {
     String username
+    String dni
     String password
     String nombreCompleto
     String avatar = '👤'
@@ -12,6 +13,7 @@ class Usuario {
         password blank: false, minSize: 6
         nombreCompleto blank: false
         avatar nullable: true
+        dni nullable: true
     }
 
     static mapping = {

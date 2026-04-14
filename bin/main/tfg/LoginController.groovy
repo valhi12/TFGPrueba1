@@ -21,7 +21,7 @@ class LoginController {
             // Intentamos crear el usuario
             def user = new Usuario(
                 username: params.email, 
-                password: params.password, 
+                password: new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode(params.password), 
                 nombreCompleto: params.nombre
             ).save(flush: true)
 

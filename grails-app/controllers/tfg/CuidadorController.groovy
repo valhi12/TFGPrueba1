@@ -4,14 +4,29 @@ class CuidadorController {
 
     CorreoService correoService
 
+    private boolean verificarCuidador() {
+        if (!session.usuario) {
+            redirect(controller: 'login', action: 'index')
+            return false
+        }
+        def rol = UsuarioRol.findByUsuario(session.usuario)?.rol?.authority
+        if (rol != 'ROLE_CUIDADOR') {
+            response.sendError(403)
+            return false
+        }
+        return true
+    }
+
     def crearPaciente() {
+        if (!verificarCuidador()) return
+
         Usuario.withTransaction { status ->
             def usuarioPaciente = new Usuario(
                 username: params.email,
-                password: params.password,
+                password: new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode(params.password),
                 nombreCompleto: params.nombre,
                 avatar: params.avatar ?: '👴🏻',
-                dni: params.dni // Asegúrate de que tu clase Usuario tenga el campo dni
+                dni: params.dni
             ).save(flush: true)
 
             if (!usuarioPaciente || usuarioPaciente.hasErrors()) {
@@ -51,6 +66,8 @@ class CuidadorController {
     }
 
     def buscarAlbum() {
+        if (!verificarCuidador()) return
+
         def dni = params.dni?.trim()
 
         if (!dni) {
@@ -59,9 +76,8 @@ class CuidadorController {
             return
         }
 
-        // Buscamos SOLO por DNI para evitar el error de "nombre"
         def paciente = Paciente.findByDni(dni)
-        
+
         if (!paciente) {
             flash.errorZip = "No se encontró ningún paciente con el DNI: ${dni}"
             redirect(controller: 'inicio', action: 'bienvenida')
@@ -80,6 +96,8 @@ class CuidadorController {
     }
 
     def descargarZip() {
+        if (!verificarCuidador()) return
+
         def album = Album.get(params.albumId)
         if (!album) {
             flash.errorZip = "Álbum no encontrado."
@@ -123,6 +141,8 @@ class CuidadorController {
     }
 
     def eliminarCuentaPaciente() {
+        if (!verificarCuidador()) return
+
         def dni = params.dni?.trim()
         def paciente = Paciente.findByDni(dni)
 
@@ -134,8 +154,8 @@ class CuidadorController {
 
         Usuario.withTransaction {
             def vinculos = UsuarioPaciente.findAllByPaciente(paciente)
-            def usuarioPaciente = vinculos.find { vp -> 
-                UsuarioRol.findByUsuario(vp.usuario)?.rol?.authority == 'ROLE_PACIENTE' 
+            def usuarioPaciente = vinculos.find { vp ->
+                UsuarioRol.findByUsuario(vp.usuario)?.rol?.authority == 'ROLE_PACIENTE'
             }?.usuario
 
             def album = Album.findByPaciente(paciente)
@@ -146,7 +166,7 @@ class CuidadorController {
 
             Invitacion.findAllByPaciente(paciente).each { it.delete(flush: true) }
             vinculos.each { it.delete(flush: true) }
-            
+
             if (usuarioPaciente) {
                 UsuarioPaciente.findAllByUsuario(usuarioPaciente).each { it.delete(flush: true) }
             }
@@ -164,6 +184,8 @@ class CuidadorController {
     }
 
     def eliminarCuentaFamiliar() {
+        if (!verificarCuidador()) return
+
         def dni = params.dni?.trim()
         def usuario = Usuario.findByDni(dni)
 
@@ -184,10 +206,13 @@ class CuidadorController {
     }
 
     def eliminarCuentaPropia() {
+        if (!verificarCuidador()) return
+
         def cuidador = session.usuario
         def password = params.password
 
-        if (cuidador.password != password) {
+        def encoder = new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder()
+        if (!encoder.matches(password, cuidador.password)) {
             flash.errorEliminar = "La contraseña introducida no es correcta."
             redirect(controller: 'inicio', action: 'bienvenida')
             return
@@ -201,17 +226,21 @@ class CuidadorController {
                     Recuerdo.findAllByAlbum(album).each { it.delete(flush: true) }
                     album.delete(flush: true)
                 }
+                Invitacion.findAllByPaciente(paciente).each { it.delete(flush: true) }
                 UsuarioPaciente.findAllByPaciente(paciente).each { it.delete(flush: true) }
                 paciente.delete(flush: true)
             }
-            UsuarioRol.findAllByUsuario(cuidador).each { it.delete(flush: true) }
+            UsuarioRol.findByUsuario(cuidador)?.delete(flush: true)
             cuidador.delete(flush: true)
         }
+
         session.invalidate()
         redirect(controller: 'login', action: 'index')
     }
 
     def generarCodigo() {
+        if (!verificarCuidador()) return
+
         Invitacion.withTransaction {
             def paciente = Paciente.findByDni(params.dniPaciente)
             if (!paciente) {
@@ -232,6 +261,8 @@ class CuidadorController {
     }
 
     def enviarCodigo() {
+        if (!verificarCuidador()) return
+
         try {
             correoService.enviarCodigoInvitacion(params.email, params.nombre, params.codigo)
             flash.message = "Código enviado correctamente."
