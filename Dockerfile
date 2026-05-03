@@ -16,13 +16,12 @@ COPY gradle.properties gradle.properties
 COPY grails-app grails-app
 COPY src src
 
-# Compilar solo el JAR ejecutable (bootJar en vez de assemble)
+# Compilar solo el JAR ejecutable
 RUN ./gradlew bootJar --no-daemon -x test
 
 # ---- Etapa de ejecución ----
 FROM eclipse-temurin:17-jre
 WORKDIR /app
-COPY --from=build /app/build/libs/*-plain.jar app-plain.jar 2>/dev/null || true
 COPY --from=build /app/build/libs/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
