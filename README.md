@@ -4,9 +4,8 @@ Este repositorio contiene el prototipo funcional de la aplicación web diseñada
 
 ---
 
-[Ver Bitácora de Incidencias](LOG.md)
+Bitácora para revisar: [Ver Bitácora de Incidencias](LOG.md)
 
----
 ---
 
 ## Arquitectura del Sistema
