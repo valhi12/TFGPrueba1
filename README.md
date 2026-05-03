@@ -4,6 +4,11 @@ Este repositorio contiene el prototipo funcional de la aplicación web diseñada
 
 ---
 
+[Ver Bitácora de Incidencias](LOG.md)
+
+---
+---
+
 ## Arquitectura del Sistema
 
 El entorno de este prototipo funciona mediante una arquitectura mixta (ejecución local + contenedores Docker) dividida en los siguientes servicios:
