@@ -1,41 +1,70 @@
 package tfg
 
-import org.springframework.mail.javamail.JavaMailSender
-import org.springframework.mail.javamail.MimeMessageHelper
+import groovy.json.JsonOutput
+import org.apache.http.client.methods.HttpPost
+import org.apache.http.entity.StringEntity
+import org.apache.http.impl.client.HttpClients
+import org.apache.http.util.EntityUtils
 
 class CorreoService {
 
-    JavaMailSender mailSender
+    static transactional = false
+
+    // Inyección del config de Grails para leer la API key desde application.yml o variable de entorno
+    def grailsApplication
 
     void enviarCodigoInvitacion(String emailDestino, String nombreFamiliar, String codigo) {
-        def mensaje = mailSender.createMimeMessage()
-        def helper = new MimeMessageHelper(mensaje, true, "UTF-8")
 
-        helper.setTo(emailDestino)
-        helper.setSubject("Tu código de invitación - Mi Álbum de Recuerdos")
+        // Lee la API key: primero variable de entorno (Railway), luego application.yml (local)
+        String apiKey = System.getenv('BREVO_API_KEY') ?:
+                grailsApplication.config.brevo.apiKey as String
 
-        String cuerpo = construirCuerpoCorreo(nombreFamiliar, codigo)
-        helper.setText(cuerpo, true)
-        mailSender.send(mensaje)
-    }
+        // Construir el cuerpo JSON de la petición a Brevo
+        def body = [
+            sender     : [name: 'Mi Álbum de Recuerdos', email: 'valhi09@gmail.com'],
+            to         : [[email: emailDestino, name: nombreFamiliar]],
+            subject    : 'Código de invitación — Mi Álbum de Recuerdos',
+            textContent: """\
+Hola ${nombreFamiliar},
 
-    private String construirCuerpoCorreo(String nombreFamiliar, String codigo) {
-        return """
-            <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto;">
-                <h2 style="color: #0d6efd;">Mi Álbum de Recuerdos</h2>
-                <p>Hola <strong>${nombreFamiliar}</strong>,</p>
-                <p>Tu cuidador te ha invitado a unirte al Álbum de Recuerdos familiar.</p>
-                <p>Tu código de invitación es:</p>
-                <div style="background:#f0f7ff; border:2px solid #0d6efd; border-radius:8px;
-                            padding:20px; text-align:center; font-size:2em;
-                            letter-spacing:5px; font-weight:bold; color:#0d6efd;">
-                    ${codigo}
-                </div>
-                <p style="margin-top:20px;">
-                    Usa este código al registrarte en la aplicación.
-                    <strong>Solo puede usarse una vez.</strong>
-                </p>
-            </div>
-        """
+Has sido invitado/a a unirte a Mi Álbum de Recuerdos.
+
+Tu código de invitación es: ${codigo}
+
+Úsalo al registrarte en la aplicación para vincularte al paciente.
+
+Un saludo,
+El equipo de Mi Álbum de Recuerdos
+"""
+        ]
+
+        // Llamada HTTP a la API de Brevo (no usa SMTP, compatible con Railway)
+        def client = HttpClients.createDefault()
+        def post = new HttpPost('https://api.brevo.com/v3/smtp/email')
+
+        try {
+            post.setHeader('accept', 'application/json')
+            post.setHeader('api-key', apiKey)
+            post.setHeader('content-type', 'application/json')
+            post.setEntity(new StringEntity(JsonOutput.toJson(body), 'UTF-8'))
+
+            def response = client.execute(post)
+            def statusCode = response.getStatusLine().getStatusCode()
+            def responseBody = EntityUtils.toString(response.getEntity())
+
+            // 201 Created = correo enviado correctamente por Brevo
+            if (statusCode >= 400) {
+                log.error("Error al enviar correo a ${emailDestino}: [${statusCode}] ${responseBody}")
+                throw new RuntimeException("Error al enviar correo: ${statusCode}")
+            }
+
+            log.info("Correo de invitación enviado a ${emailDestino} — Código: ${codigo}")
+
+        } catch (IOException e) {
+            log.error("Excepción al llamar a la API de Brevo: ${e.message}", e)
+            throw e
+        } finally {
+            client.close()
+        }
     }
 }

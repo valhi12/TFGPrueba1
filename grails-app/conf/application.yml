@@ -1,4 +1,3 @@
----
 grails:
     profile: web
     codegen:
@@ -40,6 +39,10 @@ spring:
             file-size-threshold: 0
     security:
         enabled: false
+
+# --- Brevo (reemplaza JavaMailSender — Railway bloquea puertos SMTP) ---
+brevo:
+    apiKey: TU_CLAVE_AQUI
 
 ---
 grails:

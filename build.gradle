@@ -32,6 +32,7 @@ repositories {
 
 dependencies {
     console "org.apache.grails:grails-console"
+    implementation 'org.apache.httpcomponents:httpclient:4.5.14'
     developmentOnly "org.springframework.boot:spring-boot-devtools"
     implementation platform("org.apache.grails:grails-bom:$grailsVersion")
     implementation "net.coobird:thumbnailator:0.4.20"
