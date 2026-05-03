@@ -6,7 +6,7 @@ Registro cronológico de todos los errores encontrados durante el desarrollo del
 
 ## INC-01 — `codigo_unico cannot be null` al crear paciente
 
-- **Fecha:** Abril 2026
+- **Fecha:** Marzo 2026
 - **Síntoma:** Al intentar crear un paciente desde el panel del cuidador, el servidor devolvía error SQL: `Column 'codigo_unico' cannot be null`.
 - **Causa:** La tabla `paciente` en MySQL se había creado inicialmente con `codigo_unico NOT NULL`. Aunque el dominio Groovy tenía `nullable: true`, MySQL no regeneró la columna automáticamente.
 - **Solución aplicada:** Ejecutar en Adminer: `ALTER TABLE paciente MODIFY COLUMN codigo_unico VARCHAR(255) NULL` para cambiar la columna a nullable sin perder datos.
