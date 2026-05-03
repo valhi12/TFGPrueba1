@@ -97,3 +97,40 @@ Accediendo a **Adminer** (`http://localhost:8081` -> Servidor: `tfg-db` | Usuari
 
 ### Prueba 3: Autenticación (Login)
 Utilizando las credenciales del usuario almacenado en el paso anterior, el sistema autentica correctamente la sesión y redirige al panel principal.
+
+
+---
+
+### Ejecución de las pruebas
+
+En Windows:
+```bash
+.\gradlew.bat test
+```
+
+En Mac/Linux:
+```bash
+./gradlew test
+```
+
+El informe de resultados se genera automáticamente en `build/reports/tests/test/index.html`.
+
+---
+
+## Copias de seguridad
+
+El proyecto incluye dos scripts en la raíz para guardar y restaurar el estado completo de la base de datos.
+
+**Crear copia:**
+```bash
+.\backup.bat
+```
+Genera una carpeta en `backups/` con la fecha y hora, que contiene el volcado SQL de la base de datos y una copia de `grails-app`.
+
+**Restaurar copia:**
+```bash
+.\restore.bat
+```
+Solicita el nombre exacto de la carpeta de backup (ej: `backup_2025-04-14_10-30`) y restaura la base de datos a ese estado.
+
+> El contenedor `tfg-db` debe estar en ejecución antes de restaurar. Si no lo está, ejecutar primero `docker-compose up -d`.
