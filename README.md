@@ -5,6 +5,9 @@ Este repositorio contiene el prototipo funcional de la aplicación web diseñada
 ---
 
 Bitácora para revisar: [Ver Bitácora de Incidencias](LOG.md)
+
+---
+
 Versión en producción en RailWay: https://tfgprueba1-production.up.railway.app/login
 
 ---
