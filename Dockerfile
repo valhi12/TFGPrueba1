@@ -1,17 +1,27 @@
-# Imagen base con Java 17
-FROM eclipse-temurin:17-jdk-focal
-
-# Carpeta de trabajo dentro de Docker
+# ---- Etapa de compilación ----
+FROM eclipse-temurin:17-jdk AS build
 WORKDIR /app
 
-# Copiamos todos tus archivos al contenedor
-COPY . .
-
-# Damos permisos y preparamos el ejecutable
+# Copiar wrapper de Gradle primero (caché de capas)
+COPY gradlew .
+COPY gradle gradle
 RUN chmod +x gradlew
 
-# Exponemos el puerto de la aplicación
-EXPOSE 8080
+# Copiar ficheros de configuración de build
+COPY build.gradle .
+COPY settings.gradle .
+COPY gradle.properties gradle.properties
 
-# Comando para arrancar Grails
-CMD ["./gradlew", "bootRun"]
+# Copiar código fuente
+COPY grails-app grails-app
+COPY src src
+
+# Compilar y empaquetar (sin tests para agilizar el build)
+RUN ./gradlew assemble --no-daemon -x test
+
+# ---- Etapa de ejecución ----
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/build/libs/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]

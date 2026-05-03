@@ -103,9 +103,9 @@ hibernate:
 
 dataSource:
     dbCreate: update
-    url: jdbc:mysql://localhost:3307/tfg_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: root
-    password: admin
+    url: jdbc:mysql://${MYSQLHOST:localhost}:${MYSQLPORT:3307}/${MYSQLDATABASE:tfg_db}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${MYSQLUSER:root}
+    password: ${MYSQLPASSWORD:admin}
     driverClassName: com.mysql.cj.jdbc.Driver
     dialect: org.hibernate.dialect.MySQL8Dialect
 
@@ -132,8 +132,12 @@ environments:
             url: jdbc:h2:mem:testDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
     production:
         dataSource:
-            dbCreate: none
-            url: jdbc:h2:./prodDb;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
+            dbCreate: update
+            url: jdbc:mysql://${MYSQLHOST}:${MYSQLPORT}/${MYSQLDATABASE}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+            username: ${MYSQLUSER}
+            password: ${MYSQLPASSWORD}
+            driverClassName: com.mysql.cj.jdbc.Driver
+            dialect: org.hibernate.dialect.MySQL8Dialect
             properties:
                 jmxEnabled: true
                 initialSize: 5
