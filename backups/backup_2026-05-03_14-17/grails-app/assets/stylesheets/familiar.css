@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap');
+
+:root {
+    --verde-pastel: #a8c5a0;
+    --verde-claro: #c8dfc4;
+    --verde-suave: #e8f2e6;
+    --crema: #faf8f4;
+    --marron-suave: #6b5e52;
+    --gris-texto: #4a4a4a;
+    --blanco-roto: #fdfdfa;
+    --sombra: 0 4px 24px rgba(100, 130, 100, 0.12);
+    --borde: rgba(168, 197, 160, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--crema);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--gris-texto);
+}
+
+/* PORTADA ÁLBUM */
+.album-portada {
+    background: var(--blanco-roto);
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.album-portada-info h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+    color: var(--marron-suave);
+    margin-bottom: 4px;
+}
+
+.album-portada-info p {
+    font-size: 0.85rem;
+    color: #9b9088;
+}
+
+.album-portada-icono {
+    font-size: 3rem;
+}
+
+.btn-lapiz {
+    background: var(--verde-suave);
+    border: 1.5px solid var(--borde);
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--marron-suave);
+    transition: background 0.2s, border-color 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+.btn-lapiz:hover {
+    background: var(--verde-claro);
+    border-color: var(--verde-pastel);
+}
+
+/* LISTA RECUERDOS */
+.recuerdos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.recuerdo-item {
+    background: var(--blanco-roto);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 2px 8px rgba(100,130,100,0.07);
+    transition: transform 0.15s;
+}
+
+.recuerdo-item:hover {
+    transform: translateY(-2px);
+}
+
+.recuerdo-foto {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+    border: 2px solid var(--borde);
+}
+
+.recuerdo-info {
+    flex: 1;
+}
+
+.recuerdo-info .etiqueta {
+    display: inline-block;
+    background: var(--verde-suave);
+    color: var(--marron-suave);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    border: 1px solid var(--borde);
+}
+
+.recuerdo-info .fecha {
+    font-size: 0.8rem;
+    color: #9b9088;
+    margin-bottom: 4px;
+}
+
+.recuerdo-info .texto {
+    font-size: 0.92rem;
+    color: var(--gris-texto);
+    line-height: 1.5;
+}
+
+.recuerdo-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-accion {
+    background: var(--verde-suave);
+    border: 1.5px solid var(--borde);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: 'Nunito', sans-serif;
+    color: var(--gris-texto);
+}
+
+.btn-accion:hover {
+    background: var(--verde-claro);
+}
+
+.btn-accion.eliminar:hover {
+    background: #fdecea;
+    border-color: #f5c6c2;
+    color: #c0392b;
+}
+
+/* MODAL EDITAR */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.abierto {
+    display: flex;
+}
+
+.modal-box {
+    background: var(--blanco-roto);
+    border-radius: 16px;
+    padding: 36px 40px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    animation: aparece 0.25s ease;
+}
+
+.modal-box h5 {
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    color: var(--marron-suave);
+    margin-bottom: 20px;
+}
+
+.modal-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+@keyframes aparece {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* AÑADIR RECUERDO */
+.añadir-recuerdo-form {
+    background: var(--blanco-roto);
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    padding: 32px 36px;
+    box-shadow: var(--sombra);
+    margin-top: 24px;
+}
+
+.añadir-recuerdo-form h5 {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: var(--marron-suave);
+    margin-bottom: 20px;
+}
+
+.album-vacio-card {
+    background: linear-gradient(135deg, var(--verde-suave), var(--verde-claro));
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    padding: 32px 36px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.album-vacio-icono {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.album-vacio-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.3rem;
+    color: var(--marron-suave);
+    margin-bottom: 6px;
+}
+
+.album-vacio-card p {
+    font-size: 0.9rem;
+    color: #7a6e68;
+    line-height: 1.6;
+}

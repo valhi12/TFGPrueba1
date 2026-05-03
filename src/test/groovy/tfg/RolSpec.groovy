@@ -5,14 +5,20 @@ import spock.lang.Specification
 
 class RolSpec extends Specification implements DomainUnitTest<Rol> {
 
-    def setup() {
+    def "rol sin authority no es válido"() {
+        when:
+        def rol = new Rol()
+
+        then:
+        !rol.validate()
+        rol.errors['authority']
     }
 
-    def cleanup() {
-    }
+    def "rol con authority es válido"() {
+        when:
+        def rol = new Rol(authority: 'ROLE_CUIDADOR')
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+        then:
+        rol.validate()
     }
 }

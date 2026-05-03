@@ -5,14 +5,30 @@ import spock.lang.Specification
 
 class LoginControllerSpec extends Specification implements ControllerUnitTest<LoginController> {
 
-    def setup() {
+    def "guardarRegistro sin codigo siendo familiar muestra error"() {
+        when:
+        params.tipoRegistro = 'FAMILIAR'
+        params.codigo = ''
+        controller.guardarRegistro()
+
+        then:
+        flash.message == 'El código es obligatorio para familiares.'
+        response.redirectedUrl.contains('registro')
     }
 
-    def cleanup() {
+    def "index devuelve status 200"() {
+        when:
+        controller.index()
+
+        then:
+        response.status == 200
     }
 
-    void "test something"() {
-        expect:"fix me"
-            true == false
+    def "registro devuelve status 200"() {
+        when:
+        controller.registro()
+
+        then:
+        response.status == 200
     }
 }

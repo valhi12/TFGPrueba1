@@ -5,14 +5,11 @@ import spock.lang.Specification
 
 class UsuarioPacienteSpec extends Specification implements DomainUnitTest<UsuarioPaciente> {
 
-    def setup() {
-    }
+    def "usuarioPaciente se puede instanciar"() {
+        when:
+        def up = new UsuarioPaciente()
 
-    def cleanup() {
-    }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
+        then:
+        up != null
     }
 }

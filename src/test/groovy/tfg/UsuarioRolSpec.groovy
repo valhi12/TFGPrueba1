@@ -5,14 +5,11 @@ import spock.lang.Specification
 
 class UsuarioRolSpec extends Specification implements DomainUnitTest<UsuarioRol> {
 
-    def setup() {
-    }
+    def "usuarioRol se puede instanciar"() {
+        when:
+        def ur = new UsuarioRol()
 
-    def cleanup() {
-    }
-
-    void "test something"() {
-        expect:"fix me"
-            true == false
+        then:
+        ur != null
     }
 }
