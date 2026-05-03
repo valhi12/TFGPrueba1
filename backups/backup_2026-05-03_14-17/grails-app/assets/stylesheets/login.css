@@ -71,7 +71,6 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-
 .login-card h2 {
     font-family: 'Lora', serif;
     font-size: 1.7rem;
@@ -468,7 +467,6 @@ body {
     color: var(--gris-texto);
 }
 
-
 .div-codigo {
     margin-top: 16px;
     background: var(--verde-suave);
@@ -545,3 +543,56 @@ body {
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.3);
 }
 
+/* ===== OJO CONTRASEÑA ===== */
+.campo-password {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border: 1.5px solid rgba(168,197,160,0.5);
+    border-radius: 10px;
+    background: #e8f2e6;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.campo-password input {
+    flex: 1;
+    width: auto !important;
+    min-width: 0 !important;
+    display: block;
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+    padding-right: 4px !important;
+    box-shadow: none !important;
+    margin-bottom: 0 !important;
+}
+.btn-ojo {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 12px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 100%;
+}
+.btn-ojo svg {
+    width: 20px;
+    height: 20px;
+    fill: #6b5e52;
+    opacity: 0.55;
+    transition: opacity 0.2s;
+    display: block;
+}
+.btn-ojo:hover svg {
+    opacity: 1;
+}
+
+/* ===== ERRORES CAMPO REGISTRO ===== */
+.error-campo {
+    color: #c0392b;
+    font-size: 0.82rem;
+    margin-top: 4px;
+    display: none;
+}

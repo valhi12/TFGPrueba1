@@ -82,11 +82,29 @@
                             </div>
                             <div class="campo">
                                 <label>Contraseña</label>
-                                <input type="password" name="password" id="passwordPaciente" placeholder="Mínimo 6 caracteres"/>
+                                <div style="position:relative; width:100%; display:block;">
+                                    <input type="password" name="password" id="passwordPaciente" placeholder="Mínimo 6 caracteres"
+                                           style="width:100%; padding:11px 44px 11px 16px; border:1.5px solid #dde8db; border-radius:10px; font-family:'Nunito',sans-serif; font-size:0.95rem; color:#4a4a4a; background:#e8f2e6; outline:none; box-sizing:border-box;"/>
+                                    <button type="button" onclick="toggleOjo('passwordPaciente','svgOjoPP')" tabindex="-1"
+                                            style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:4px; line-height:0;">
+                                        <svg id="svgOjoPP" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" style="display:block; fill:#6b5e52; opacity:0.6;">
+                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                             <div class="campo">
                                 <label>Repite la contraseña</label>
-                                <input type="password" id="password2Paciente" placeholder="Repite la contraseña"/>
+                                <div style="position:relative; width:100%; display:block;">
+                                    <input type="password" id="password2Paciente" placeholder="Repite la contraseña"
+                                           style="width:100%; padding:11px 44px 11px 16px; border:1.5px solid #dde8db; border-radius:10px; font-family:'Nunito',sans-serif; font-size:0.95rem; color:#4a4a4a; background:#e8f2e6; outline:none; box-sizing:border-box;"/>
+                                    <button type="button" onclick="toggleOjo('password2Paciente','svgOjoPP2')" tabindex="-1"
+                                            style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:4px; line-height:0;">
+                                        <svg id="svgOjoPP2" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" style="display:block; fill:#6b5e52; opacity:0.6;">
+                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
                                 <div id="errorPasswordPaciente" class="error-campo"></div>
                             </div>
                             <div class="campo" style="grid-column: 1 / -1;">
@@ -147,8 +165,32 @@
                                 <div class="campo"><label>Nombre completo</label><input type="text" name="nombreFamiliar" required/></div>
                                 <div class="campo"><label>DNI</label><input type="text" name="dniFamiliar" required/></div>
                                 <div class="campo"><label>Email</label><input type="text" name="emailFamiliar" required/></div>
-                                <div class="campo"><label>Contraseña</label><input type="password" name="passwordFamiliar" required/></div>
-                                <div class="campo"><label>Repite contraseña</label><input type="password" name="passwordFamiliar2" required/></div>
+                                <div class="campo">
+                                    <label>Contraseña</label>
+                                    <div style="position:relative; width:100%; display:block;">
+                                        <input type="password" name="passwordFamiliar" id="passwordFamiliar" placeholder="" required
+                                               style="width:100%; padding:11px 44px 11px 16px; border:1.5px solid #dde8db; border-radius:10px; font-family:'Nunito',sans-serif; font-size:0.95rem; color:#4a4a4a; background:#e8f2e6; outline:none; box-sizing:border-box;"/>
+                                        <button type="button" onclick="toggleOjo('passwordFamiliar','svgOjoPF')" tabindex="-1"
+                                                style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:4px; line-height:0;">
+                                            <svg id="svgOjoPF" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" style="display:block; fill:#6b5e52; opacity:0.6;">
+                                                <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="campo">
+                                    <label>Repite contraseña</label>
+                                    <div style="position:relative; width:100%; display:block;">
+                                        <input type="password" name="passwordFamiliar2" id="passwordFamiliar2" placeholder="" required
+                                               style="width:100%; padding:11px 44px 11px 16px; border:1.5px solid #dde8db; border-radius:10px; font-family:'Nunito',sans-serif; font-size:0.95rem; color:#4a4a4a; background:#e8f2e6; outline:none; box-sizing:border-box;"/>
+                                        <button type="button" onclick="toggleOjo('passwordFamiliar2','svgOjoPF2')" tabindex="-1"
+                                                style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:4px; line-height:0;">
+                                            <svg id="svgOjoPF2" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" style="display:block; fill:#6b5e52; opacity:0.6;">
+                                                <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <hr class="form-separador"/>
                             <p class="form-subtitulo">Paciente a vincular</p>
@@ -241,8 +283,16 @@
                         <div style="max-width:300px;">
                             <div class="campo">
                                 <label>Confirma tu contraseña</label>
-                                <input type="password" id="passwordCuidadorEliminar" placeholder="Tu contraseña actual"
-                                       style="width:100%; padding:11px 16px; border:1.5px solid #f5c6c2; border-radius:10px; background:var(--blanco-roto); outline:none;"/>
+                                <div style="position:relative; width:100%; display:block;">
+                                    <input type="password" id="passwordCuidadorEliminar" placeholder="Tu contraseña actual"
+                                           style="width:100%; padding:11px 44px 11px 16px; border:1.5px solid #f5c6c2; border-radius:10px; background:var(--blanco-roto); outline:none; box-sizing:border-box;"/>
+                                    <button type="button" onclick="toggleOjo('passwordCuidadorEliminar','svgOjoEliminar')" tabindex="-1"
+                                            style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:4px; line-height:0;">
+                                        <svg id="svgOjoEliminar" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" style="display:block; fill:#6b5e52; opacity:0.6;">
+                                            <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"/>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div style="margin-top:16px;">
@@ -298,6 +348,22 @@
 </div>
 
 <script>
+    // ===== OJO CONTRASEÑA =====
+    var SVG_ABIERTO = '<path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.47,133.47,0,0,1,25,128,133.33,133.33,0,0,1,48.07,97.25C70.33,75.19,97.22,64,128,64s57.67,11.19,79.93,33.25A133.46,133.46,0,0,1,231.05,128C223.84,141.46,192.43,192,128,192Zm0-112a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Z"/>';
+    var SVG_CERRADO = '<path d="M53.92,34.62A8,8,0,1,0,42.08,45.38L61.32,66.55C25,88.84,9.38,123.2,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208a127.11,127.11,0,0,0,52.07-10.83l22,24.21a8,8,0,1,0,11.84-10.76Zm47.33,75.84,41.67,45.85a32,32,0,0,1-41.67-45.85ZM128,192c-30.78,0-57.67-11.19-79.93-33.25A133.16,133.16,0,0,1,25,128c4.69-8.79,19.66-33.39,47.35-49.38l18,19.75a48,48,0,0,0,63.66,70l14.73,16.2A112,112,0,0,1,128,192Zm6-95.43a8,8,0,0,1,3-15.72,48.16,48.16,0,0,1,38.77,42.64,8,8,0,0,1-7.22,8.71,6.39,6.39,0,0,1-.75,0,8,8,0,0,1-8-7.26A32.09,32.09,0,0,0,134,96.57Zm113.28,34.69c-.42.94-10.55,23.37-33.36,43.8a8,8,0,1,1-10.67-11.92A132.77,132.77,0,0,0,231.05,128a133.15,133.15,0,0,0-23.12-30.77C185.67,75.19,158.78,64,128,64a118.37,118.37,0,0,0-19.36,1.57A8,8,0,1,1,106,49.79,134,134,0,0,1,128,48c34.88,0,66.57,13.26,91.66,38.35,18.83,18.83,27.3,37.62,27.65,38.41A8,8,0,0,1,247.31,131.26Z"/>';
+
+    function toggleOjo(inputId, svgId) {
+        var input = document.getElementById(inputId);
+        var svg = document.getElementById(svgId);
+        if (input.type === 'password') {
+            input.type = 'text';
+            svg.innerHTML = SVG_CERRADO;
+        } else {
+            input.type = 'password';
+            svg.innerHTML = SVG_ABIERTO;
+        }
+    }
+
     function cambiarTab(nombre, btn) {
         document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('activo'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('activo'));
@@ -316,13 +382,13 @@
             if (!dni) { alert('Introduce el DNI del paciente.'); return; }
             document.getElementById('dniPacienteConfirm').textContent = dni;
             document.getElementById('hiddenDniPaciente').value = dni;
-        } 
+        }
         else if (modalId === 'modalEliminarFamiliar') {
             const dni = document.getElementById('dniFamiliarEliminar').value.trim();
             if (!dni) { alert('Introduce el DNI del familiar.'); return; }
             document.getElementById('dniFamiliarConfirm').textContent = dni;
             document.getElementById('hiddenDniFamiliar').value = dni;
-        } 
+        }
         else if (modalId === 'modalEliminarPropia') {
             const password = document.getElementById('passwordCuidadorEliminar').value;
             if (!password) { alert('Introduce tu contraseña.'); return; }
@@ -336,7 +402,6 @@
     }
 
     window.addEventListener('DOMContentLoaded', function() {
-        // Lógica de apertura automática de pestañas por errores o procesos
         if (${flash.codigoGenerado ? 'true' : 'false'}) {
             cambiarTab('vincularFamiliar', document.querySelector('.tab-btn:nth-child(3)'));
         } else if (${params.mostrarZip || flash.errorZip ? 'true' : 'false'}) {

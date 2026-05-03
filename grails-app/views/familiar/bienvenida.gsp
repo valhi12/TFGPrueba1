@@ -178,7 +178,7 @@
 
                             <p class="form-subtitulo">Fotos del álbum</p>
                             <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;">
-                                <g:each in="${album.recuerdos?.sort { it.fecha }}" var="recuerdo">
+                                <g:each in="${recuerdos}" var="recuerdo">
                                     <div style="display:flex; align-items:flex-start; gap:16px; background:#fdfdfa; border:1px solid rgba(168,197,160,0.3); border-radius:14px; padding:16px 20px;">
                                         <img src="${g.createLink(controller:'familiar', action:'foto', id:recuerdo.id)}"
                                              style="width:90px; height:90px; object-fit:cover; border-radius:10px; border:2px solid rgba(168,197,160,0.3); flex-shrink:0;"/>

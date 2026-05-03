@@ -11,7 +11,9 @@ class FamiliarController {
         def vinculo = UsuarioPaciente.findByUsuario(usuario)
         def paciente = vinculo?.paciente
         def album = paciente ? Album.findByPaciente(paciente) : null
-        [usuario: usuario, paciente: paciente, album: album]
+        // Ordenar recuerdos cronológicamente desde la BD
+        def recuerdos = album ? Recuerdo.findAllByAlbum(album, [sort: 'fecha', order: 'asc']) : []
+        [usuario: usuario, paciente: paciente, album: album, recuerdos: recuerdos]
     }
 
     def crearAlbum() {
