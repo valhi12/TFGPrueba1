@@ -209,7 +209,7 @@
                     </g:if>
 
                     <div style="background:var(--verde-suave); border-radius:14px; padding:24px 28px; margin-bottom:20px;">
-                        <h5>🧓 Eliminar cuenta de paciente</h5>
+                        <h5>👵🏻 Eliminar cuenta de paciente</h5>
                         <div class="form-grid" style="max-width:500px;">
                             <div class="campo">
                                 <label>DNI del paciente</label>
@@ -218,7 +218,7 @@
                             </div>
                         </div>
                         <div style="margin-top:16px;">
-                            <button type="button" class="btn-primario" style="background:#e74c3c;" onclick="abrirModalEliminar('modalEliminarPaciente')">Eliminar paciente</button>
+                            <button type="button" class="btn-peligro" onclick="abrirModalEliminar('modalEliminarPaciente')">Eliminar paciente</button>
                         </div>
                     </div>
 
@@ -232,7 +232,7 @@
                             </div>
                         </div>
                         <div style="margin-top:16px;">
-                            <button type="button" class="btn-primario" style="background:#e74c3c;" onclick="abrirModalEliminar('modalEliminarFamiliar')">Eliminar familiar</button>
+                            <button type="button" class="btn-peligro" onclick="abrirModalEliminar('modalEliminarFamiliar')">Eliminar familiar</button>
                         </div>
                     </div>
 
@@ -246,7 +246,7 @@
                             </div>
                         </div>
                         <div style="margin-top:16px;">
-                            <button type="button" class="btn-primario" style="background:#c0392b;" onclick="abrirModalEliminar('modalEliminarPropia')">Eliminar mi cuenta</button>
+                            <button type="button" class="btn-peligro-grave" onclick="abrirModalEliminar('modalEliminarPropia')">Eliminar mi cuenta</button>
                         </div>
                     </div>
                 </div>
@@ -263,7 +263,7 @@
             <button type="button" class="btn-secundario" onclick="cerrarModal('modalEliminarPaciente')">Cancelar</button>
             <g:form controller="cuidador" action="eliminarCuentaPaciente" style="display:inline;">
                 <input type="hidden" id="hiddenDniPaciente" name="dni"/>
-                <button type="submit" class="btn-primario" style="background:#e74c3c;">Sí, eliminar</button>
+                <button type="submit" class="btn-peligro">Sí, eliminar</button>
             </g:form>
         </div>
     </div>
@@ -277,7 +277,7 @@
             <button type="button" class="btn-secundario" onclick="cerrarModal('modalEliminarFamiliar')">Cancelar</button>
             <g:form controller="cuidador" action="eliminarCuentaFamiliar" style="display:inline;">
                 <input type="hidden" id="hiddenDniFamiliar" name="dni"/>
-                <button type="submit" class="btn-primario" style="background:#e74c3c;">Sí, eliminar</button>
+                <button type="submit" class="btn-peligro">Sí, eliminar</button>
             </g:form>
         </div>
     </div>
@@ -291,7 +291,7 @@
             <button type="button" class="btn-secundario" onclick="cerrarModal('modalEliminarPropia')">Cancelar</button>
             <g:form controller="cuidador" action="eliminarCuentaPropia" style="display:inline;">
                 <input type="hidden" id="hiddenPasswordCuidador" name="password"/>
-                <button type="submit" class="btn-primario" style="background:#c0392b;">Sí, eliminar</button>
+                <button type="submit" class="btn-peligro-grave">Sí, eliminar</button>
             </g:form>
         </div>
     </div>

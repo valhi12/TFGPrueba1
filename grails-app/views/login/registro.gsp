@@ -162,6 +162,17 @@
             }
         }
 
+        // ===== VALIDACIÓN DE CONTRASEÑA COMPARTIDA =====
+        // Mínimo 6 caracteres, 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial
+        function validarPassword(pass) {
+            if (pass.length < 6) return 'La contraseña debe tener mínimo 6 caracteres.';
+            if (!/[A-Z]/.test(pass)) return 'La contraseña debe contener al menos una mayúscula.';
+            if (!/[a-z]/.test(pass)) return 'La contraseña debe contener al menos una minúscula.';
+            if (!/[0-9]/.test(pass)) return 'La contraseña debe contener al menos un número.';
+            if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pass)) return 'La contraseña debe contener al menos un carácter especial.';
+            return null; // null = sin errores
+        }
+
         function validarYEnviar() {
             let valido = true;
 
@@ -200,12 +211,16 @@
                 errorPassword.textContent = 'Las contraseñas no coinciden.';
                 errorPassword.style.display = 'block';
                 valido = false;
-            } else if (pass1.length < 6) {
-                errorPassword.textContent = 'La contraseña debe tener mínimo 6 caracteres.';
-                errorPassword.style.display = 'block';
-                valido = false;
             } else {
-                errorPassword.style.display = 'none';
+                // Validar fortaleza de la contraseña
+                var errorFuerza = validarPassword(pass1);
+                if (errorFuerza) {
+                    errorPassword.textContent = errorFuerza;
+                    errorPassword.style.display = 'block';
+                    valido = false;
+                } else {
+                    errorPassword.style.display = 'none';
+                }
             }
 
             const esFamiliar = document.getElementById('radioFamiliar').checked;

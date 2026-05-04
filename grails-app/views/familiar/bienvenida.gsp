@@ -229,10 +229,10 @@
                                 </label>
                             </div>
 
-                            <div class="form-acciones">
-                                <button type="button" onclick="window.location.reload()" class="btn-secundario">Cancelar</button>
-                                <button type="submit" class="btn-primario">Guardar cambios</button>
-                            </div>
+                           <div class="form-acciones" style="gap:16px;">
+                            <button type="button" onclick="window.location.reload()" class="btn-secundario">Cancelar</button>
+                            <button type="submit" class="btn-primario">Guardar cambios</button>
+                        </div>
                         </g:form>
                     </div>
                 </div>

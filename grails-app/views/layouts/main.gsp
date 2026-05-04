@@ -13,7 +13,18 @@
 <body>
 
     <nav class="navbar-app">
-        <span class="marca">Mi Álbum de Recuerdos</span>
+        <%-- Marca: enlace a inicio si hay sesión (inicio/bienvenida redirige por rol automáticamente) --%>
+        <g:if test="${session.usuario}">
+           <a href="${g.createLink(controller:'inicio', action:'bienvenida')}"
+                class="marca"
+                style="text-decoration:none; color:var(--verde-pastel); cursor:pointer; font-family:inherit; font-size:inherit; font-weight:inherit; background:none; border:none; padding:0;">
+                Mi Álbum de Recuerdos
+            </a>
+        </g:if>
+        <g:else>
+            <span class="marca">Mi Álbum de Recuerdos</span>
+        </g:else>
+
         <div style="display:flex; align-items:center; gap:12px; margin-left:auto;">
             <g:if test="${esFamiliar}">
                 <a href="${g.createLink(controller:'familiar', action:'bienvenida')}#album"

@@ -545,3 +545,11 @@ body {
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.3);
 }
 
+.error-campo {
+    display: none;
+    color: #c0392b;
+    font-size: 0.82rem;
+    font-family: 'Nunito', sans-serif;
+    margin-top: 5px;
+    font-weight: 600;
+}

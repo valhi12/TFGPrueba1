@@ -33,7 +33,7 @@
                 <div class="banner-icono">📖</div>
                 <div>
                     <h3>Bienvenido al Álbum de Recuerdos</h3>
-                    <p>Este es el espacio donde la familia cuida la memoria. Gestiona perfiles, invita a familiares y revive momentos especiales.</p>
+                    <p>Este es el espacio donde la familia cuida la memoria. Gestiona perfiles, invita a familiares y descarga los álbumes</p>
                 </div>
             </div>
             <div class="inicio-grid" style="margin-top:24px;">
@@ -49,8 +49,8 @@
                 </div>
                 <div class="inicio-card">
                     <div class="card-icono">🖼️</div>
-                    <h4>Gestionar Recuerdos</h4>
-                    <p>Añade fotos y descripciones al álbum.</p>
+                    <h4>Descarga álbumes</h4>
+                    <p>Descarga los álbumes en formato zip</p>
                 </div>
             </div>
         </div>
@@ -122,7 +122,8 @@
                             </div>
                         </div>
                         <div class="form-acciones">
-                            <button type="submit" class="btn-primario">Crear Paciente</button>
+                            <%-- type="button" para que pase por validarCrearPaciente() antes de enviar --%>
+                            <button type="button" onclick="validarCrearPaciente()" class="btn-primario">Crear Paciente</button>
                         </div>
                     </g:form>
                 </div>
@@ -159,16 +160,16 @@
                     </g:if>
 
                     <div id="formularioVincular" style="${flash.codigoGenerado ? 'display:none;' : ''}">
-                        <g:form controller="cuidador" action="generarCodigo">
+                        <g:form controller="cuidador" action="generarCodigo" id="formVincularFamiliar">
                             <p class="form-subtitulo">Datos del familiar</p>
                             <div class="form-grid">
-                                <div class="campo"><label>Nombre completo</label><input type="text" name="nombreFamiliar" required/></div>
-                                <div class="campo"><label>DNI</label><input type="text" name="dniFamiliar" required/></div>
-                                <div class="campo"><label>Email</label><input type="text" name="emailFamiliar" required/></div>
+                                <div class="campo"><label>Nombre completo</label><input type="text" name="nombreFamiliar" placeholder="Nombre y apellidos" required/></div>
+                                <div class="campo"><label>DNI</label><input type="text" name="dniFamiliar" placeholder="Ej: 12345678A" required/></div>
+                                <div class="campo"><label>Email</label><input type="text" name="emailFamiliar" placeholder="ejemplo@gmail.com" required/></div>
                                 <div class="campo">
                                     <label>Contraseña</label>
                                     <div style="position:relative; width:100%; display:block;">
-                                        <input type="password" name="passwordFamiliar" id="passwordFamiliar" placeholder="" required
+                                        <input type="password" name="passwordFamiliar" id="passwordFamiliar" placeholder="Mínimo 6 caracteres" required
                                                style="width:100%; padding:11px 44px 11px 16px; border:1.5px solid #dde8db; border-radius:10px; font-family:'Nunito',sans-serif; font-size:0.95rem; color:#4a4a4a; background:#e8f2e6; outline:none; box-sizing:border-box;"/>
                                         <button type="button" onclick="toggleOjo('passwordFamiliar','svgOjoPF')" tabindex="-1"
                                                 style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:4px; line-height:0;">
@@ -181,7 +182,7 @@
                                 <div class="campo">
                                     <label>Repite contraseña</label>
                                     <div style="position:relative; width:100%; display:block;">
-                                        <input type="password" name="passwordFamiliar2" id="passwordFamiliar2" placeholder="" required
+                                        <input type="password" name="passwordFamiliar2" id="passwordFamiliar2" placeholder="Repite la contraseña" required
                                                style="width:100%; padding:11px 44px 11px 16px; border:1.5px solid #dde8db; border-radius:10px; font-family:'Nunito',sans-serif; font-size:0.95rem; color:#4a4a4a; background:#e8f2e6; outline:none; box-sizing:border-box;"/>
                                         <button type="button" onclick="toggleOjo('passwordFamiliar2','svgOjoPF2')" tabindex="-1"
                                                 style="position:absolute; right:10px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; padding:4px; line-height:0;">
@@ -190,6 +191,7 @@
                                             </svg>
                                         </button>
                                     </div>
+                                    <div id="errorPasswordFamiliar" class="error-campo"></div>
                                 </div>
                             </div>
                             <hr class="form-separador"/>
@@ -201,7 +203,8 @@
                                 </div>
                             </div>
                             <div class="form-acciones">
-                                <button type="submit" class="btn-primario">Generar Código</button>
+                                <%-- type="button" para que pase por validarVincularFamiliar() antes de enviar --%>
+                                <button type="button" onclick="validarVincularFamiliar()" class="btn-primario">Generar Código</button>
                             </div>
                         </g:form>
                     </div>
@@ -251,7 +254,7 @@
                     </g:if>
 
                     <div style="background:var(--verde-suave); border-radius:14px; padding:24px 28px; margin-bottom:20px;">
-                        <h5>🧓 Eliminar cuenta de paciente</h5>
+                        <h5>👵🏻 Eliminar cuenta de paciente</h5>
                         <div class="form-grid" style="max-width:500px;">
                             <div class="campo">
                                 <label>DNI del paciente</label>
@@ -265,7 +268,7 @@
                     </div>
 
                     <div style="background:var(--verde-suave); border-radius:14px; padding:24px 28px; margin-bottom:20px;">
-                        <h5>👨‍👩‍👧 Eliminar cuenta de familiar</h5>
+                        <h5>👨🏽 Eliminar cuenta de familiar</h5>
                         <div class="form-grid" style="max-width:500px;">
                             <div class="campo">
                                 <label>DNI del familiar</label>
@@ -411,15 +414,90 @@
         }
     });
 
+    // ===== VALIDACIÓN DE CONTRASEÑA COMPARTIDA =====
+    // Mínimo 6 caracteres, 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial
+    function validarPassword(pass) {
+        if (pass.length < 6) return 'La contraseña debe tener mínimo 6 caracteres.';
+        if (!/[A-Z]/.test(pass)) return 'La contraseña debe contener al menos una mayúscula.';
+        if (!/[a-z]/.test(pass)) return 'La contraseña debe contener al menos una minúscula.';
+        if (!/[0-9]/.test(pass)) return 'La contraseña debe contener al menos un número.';
+        if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pass)) return 'La contraseña debe contener al menos un carácter especial.';
+        return null; // null = sin errores
+    }
+
+    // ===== VALIDAR CREAR PACIENTE =====
     function validarCrearPaciente() {
         let valido = true;
+
         const nombre = document.getElementById('nombrePaciente').value.trim();
+        if (!nombre) {
+            document.getElementById('errorNombrePaciente').style.display = 'block';
+            valido = false;
+        } else {
+            document.getElementById('errorNombrePaciente').style.display = 'none';
+        }
+
         const dni = document.getElementById('dniPaciente').value.trim();
-        if (!nombre) { document.getElementById('errorNombrePaciente').style.display = 'block'; valido = false; }
-        else document.getElementById('errorNombrePaciente').style.display = 'none';
-        if (dni.length < 9) { document.getElementById('errorDniPaciente').textContent = 'DNI inválido.'; document.getElementById('errorDniPaciente').style.display = 'block'; valido = false; }
-        else document.getElementById('errorDniPaciente').style.display = 'none';
+        if (dni.length < 9) {
+            document.getElementById('errorDniPaciente').textContent = 'DNI inválido.';
+            document.getElementById('errorDniPaciente').style.display = 'block';
+            valido = false;
+        } else {
+            document.getElementById('errorDniPaciente').style.display = 'none';
+        }
+
+        const pass1 = document.getElementById('passwordPaciente').value;
+        const pass2 = document.getElementById('password2Paciente').value;
+        const errorPass = document.getElementById('errorPasswordPaciente');
+        if (pass1 === '' || pass2 === '') {
+            errorPass.textContent = 'Debes rellenar las dos contraseñas.';
+            errorPass.style.display = 'block';
+            valido = false;
+        } else if (pass1 !== pass2) {
+            errorPass.textContent = 'Las contraseñas no coinciden.';
+            errorPass.style.display = 'block';
+            valido = false;
+        } else {
+            var errorFuerza = validarPassword(pass1);
+            if (errorFuerza) {
+                errorPass.textContent = errorFuerza;
+                errorPass.style.display = 'block';
+                valido = false;
+            } else {
+                errorPass.style.display = 'none';
+            }
+        }
+
         if (valido) document.querySelector('#tab-crearPaciente form').submit();
+    }
+
+    // ===== VALIDAR VINCULAR FAMILIAR =====
+    function validarVincularFamiliar() {
+        let valido = true;
+
+        const pass1 = document.getElementById('passwordFamiliar').value;
+        const pass2 = document.getElementById('passwordFamiliar2').value;
+        const errorPass = document.getElementById('errorPasswordFamiliar');
+        if (pass1 === '' || pass2 === '') {
+            errorPass.textContent = 'Debes rellenar las dos contraseñas.';
+            errorPass.style.display = 'block';
+            valido = false;
+        } else if (pass1 !== pass2) {
+            errorPass.textContent = 'Las contraseñas no coinciden.';
+            errorPass.style.display = 'block';
+            valido = false;
+        } else {
+            var errorFuerza = validarPassword(pass1);
+            if (errorFuerza) {
+                errorPass.textContent = errorFuerza;
+                errorPass.style.display = 'block';
+                valido = false;
+            } else {
+                errorPass.style.display = 'none';
+            }
+        }
+
+        if (valido) document.getElementById('formVincularFamiliar').submit();
     }
 </script>
 </body>

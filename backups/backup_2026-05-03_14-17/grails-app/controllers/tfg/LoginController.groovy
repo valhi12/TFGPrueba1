@@ -92,6 +92,8 @@ class LoginController {
             def encoder = new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder()
             if (encoder.matches(password, user.password)) {
                 session.usuario = user
+                // Guardar rol en sesión para uso en layout
+                session.rol = UsuarioRol.findByUsuario(user)?.rol?.authority
                 redirect(controller: 'inicio', action: 'bienvenida')
                 return
             }

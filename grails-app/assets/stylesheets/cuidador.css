@@ -366,6 +366,44 @@ body {
     transform: translateY(-1px);
 }
 
+/* Botón eliminar — terracota suave */
+.btn-peligro {
+    padding: 11px 28px;
+    background-color: #c0736a;
+    color: var(--blanco-roto);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-peligro:hover {
+    background-color: #ad6259;
+    transform: translateY(-1px);
+}
+
+/* Botón eliminar cuenta propia — terracota oscuro */
+.btn-peligro-grave {
+    padding: 11px 28px;
+    background-color: #a85d54;
+    color: var(--blanco-roto);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-peligro-grave:hover {
+    background-color: #954f47;
+    transform: translateY(-1px);
+}
+
 /* CÓDIGO GENERADO */
 .codigo-generado-box {
     background: var(--verde-suave);
@@ -463,12 +501,4 @@ body {
     font-size: 0.78rem;
     color: #bbb;
     border-top: 1px solid var(--borde);
-}
-
-
-.error-campo {
-    color: #c0392b;
-    font-size: 0.82rem;
-    margin-top: 4px;
-    display: none;
 }
