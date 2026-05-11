@@ -472,6 +472,7 @@
     }
 
     // ===== VALIDAR VINCULAR FAMILIAR =====
+    // ===== VALIDAR VINCULAR FAMILIAR =====
     function validarVincularFamiliar() {
         let valido = true;
 
@@ -497,7 +498,7 @@
             }
         }
 
-        if (valido) document.getElementById('formVincularFamiliar').submit();
+        if (valido) document.querySelector('#tab-vincularFamiliar form').submit();
     }
 </script>
 </body>
