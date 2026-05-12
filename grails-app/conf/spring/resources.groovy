@@ -2,16 +2,11 @@ import org.springframework.mail.javamail.JavaMailSenderImpl
 import java.util.Properties
 
 beans = {
-
-    // mailSender desactivado — Railway bloquea puertos SMTP (587/465/25)
-    // Ahora se usa Brevo HTTP API desde CorreoService.groovy
-    // Descomenta si ejecutas en un entorno que permita SMTP:
-    /*
     mailSender(JavaMailSenderImpl) {
-        host = 'smtp.gmail.com'
+        host = 'smtp-relay.brevo.com'        // Servidor Brevo
         port = 587
-        username = 'valhi09@gmail.com'
-        password = 'CLAVE_DE_APP_16_CHARS'
+        username = 'TU_EMAIL_DE_BREVO'       // El email con el que te registraste en Brevo
+        password = 'TU_CLAVE_SMTP_BREVO'     // La clave larga generada en el Paso 1
         javaMailProperties = {
             Properties props = new Properties()
             props.put('mail.smtp.auth', 'true')
@@ -20,5 +15,4 @@ beans = {
             return props
         }()
     }
-    */
 }

@@ -41,6 +41,7 @@
                     </button>
                     <div class="avatar-dropdown" id="avatarDropdown">
                         <div class="nombre-usuario">${session.usuario?.nombreCompleto}</div>
+                        <g:link controller="perfil" action="index">Mi perfil</g:link>
                         <g:link controller="inicio" action="logout">Cerrar sesión</g:link>
                     </div>
                 </div>

@@ -40,9 +40,9 @@ spring:
     security:
         enabled: false
 
-# --- Brevo (reemplaza JavaMailSender — Railway bloquea puertos SMTP) ---
+
 brevo:
-    apiKey: TU_CLAVE_AQUI
+    apiKey: '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'
 
 ---
 grails:

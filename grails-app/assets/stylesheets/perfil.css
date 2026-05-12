@@ -1,0 +1,215 @@
+/* ── PERFIL ───────────────────────────────────────────────── */
+
+.perfil-main {
+    max-width: 1000px;
+    margin: 40px auto 60px;
+    padding: 0 20px;
+}
+
+.perfil-titulo {
+    font-family: 'Lora', serif;
+    font-size: 1.8rem;
+    color: var(--marron-suave, #6b5e52);
+    margin-bottom: 28px;
+}
+
+/* Secciones */
+.perfil-seccion {
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 30px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(107,94,82,0.08);
+}
+
+.perfil-subtitulo {
+    font-family: 'Lora', serif;
+    font-size: 1.15rem;
+    color: var(--verde-pastel, #a8c5a0);
+    margin-bottom: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid rgba(168,197,160,0.35);
+}
+
+/* Campos */
+.perfil-campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.perfil-campo label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #6b5e52;
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+}
+
+.perfil-campo input {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    border: 1.5px solid rgba(168,197,160,0.5);
+    border-radius: 9px;
+    background: var(--crema, #faf8f4);
+    color: #3d3530;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.perfil-campo input:focus {
+    border-color: var(--verde-pastel, #a8c5a0);
+}
+
+.perfil-readonly {
+    background: #f0ece8 !important;
+    color: #9b8f88 !important;
+    cursor: not-allowed;
+}
+
+.perfil-hint {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.78rem;
+    color: #b0a39a;
+    margin-top: 4px;
+}
+
+/* Botón */
+.perfil-btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    background: var(--verde-pastel, #a8c5a0);
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    padding: 11px 28px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.perfil-btn:hover {
+    background: #8db385;
+}
+
+/* Avatar */
+.perfil-avatar-bloque {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.perfil-avatar-actual {
+    font-size: 3.5rem;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--crema, #faf8f4);
+    border: 2.5px solid rgba(168,197,160,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.perfil-avatar-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.83rem;
+    color: #9b8f88;
+    margin-bottom: 10px;
+}
+
+.avatar-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    max-width: 380px;
+}
+
+.avatar-opcion {
+    font-size: 1.6rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.15s, background 0.15s;
+}
+
+.avatar-opcion:hover {
+    background: rgba(168,197,160,0.2);
+}
+
+.avatar-opcion.seleccionado {
+    border-color: var(--verde-pastel, #a8c5a0);
+    background: rgba(168,197,160,0.15);
+}
+
+/* Flash */
+.perfil-flash {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 12px 18px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+}
+
+.perfil-flash--ok {
+    background: #e6f4e3;
+    color: #3a7a33;
+    border: 1px solid #b6ddb0;
+}
+
+.perfil-flash--error {
+    background: #fdecea;
+    color: #b94040;
+    border: 1px solid #f0b8b8;
+}
+
+/* Enlace Mi perfil en el dropdown */
+.avatar-dropdown g-link,
+.avatar-dropdown a {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    color: var(--marron-suave, #6b5e52);
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.avatar-dropdown a:hover {
+    background: rgba(168,197,160,0.15);
+}
+
+.perfil-columnas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    align-items: stretch;
+}
+
+.perfil-seccion--seguridad {
+    display: flex;
+    flex-direction: column;
+}
+
+.perfil-seccion--seguridad form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.perfil-seccion--seguridad .perfil-btn {
+    margin-top: auto;
+}
