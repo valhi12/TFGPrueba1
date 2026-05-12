@@ -208,9 +208,10 @@
                                             </div>
                                             <div>
                                                 <label style="display:block;font-size:0.8rem;font-weight:600;color:#6b5e52;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.4px;">Cambiar foto (opcional)</label>
-                                                <label style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; background:var(--blanco-roto); border:1.5px solid rgba(168,197,160,0.4); border-radius:10px; padding:8px 14px; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:600; color:#6b5e52;">
+                                                <label id="lblCambiarFoto_${recuerdo.id}" style="display:inline-flex; align-items:center; gap:8px; cursor:pointer; background:var(--blanco-roto); border:1.5px solid rgba(168,197,160,0.4); border-radius:10px; padding:8px 14px; font-family:'Nunito',sans-serif; font-size:0.88rem; font-weight:600; color:#6b5e52;">
                                                     📷 Cambiar imagen
-                                                    <input type="file" name="foto_recuerdo_${recuerdo.id}" accept="image/*" style="display:none;"/>
+                                                    <input type="file" name="foto_recuerdo_${recuerdo.id}" accept="image/*" style="display:none;"
+                                                        onchange="var lbl=document.getElementById('lblCambiarFoto_${recuerdo.id}'); lbl.style.background='#fff3cd'; lbl.style.borderColor='#f0a500'; lbl.style.color='#b07800'; lbl.childNodes[0].textContent='Imagen seleccionada ';"/>
                                                 </label>
                                             </div>
                                         </div>
