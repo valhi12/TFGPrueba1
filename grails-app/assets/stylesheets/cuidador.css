@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap');
 
+/* Variables globales de colores, sombras y bordes reutilizables en toda la app */
 :root {
     --verde-pastel: #a8c5a0;
     --verde-claro: #c8dfc4;
@@ -12,6 +13,7 @@
     --borde: rgba(168, 197, 160, 0.3);
 }
 
+/* Reset general y fuente base del cuerpo */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -23,7 +25,7 @@ body {
     color: var(--gris-texto);
 }
 
-/* ===== NAVBAR ===== */
+/* Barra de navegación superior con logo y avatar */
 .navbar-app {
     background: var(--blanco-roto);
     border-bottom: 1px solid var(--borde);
@@ -35,6 +37,7 @@ body {
     box-shadow: 0 1px 8px rgba(100,130,100,0.08);
 }
 
+/* Tipografía del nombre de la aplicación en la navbar */
 .navbar-app .marca {
     font-family: 'Lora', serif;
     font-size: 1.15rem;
@@ -42,11 +45,12 @@ body {
     letter-spacing: 0.2px;
 }
 
-/* AVATAR DROPDOWN */
+/* Contenedor relativo que ancla el desplegable al botón de avatar */
 .avatar-wrapper {
     position: relative;
 }
 
+/* Botón circular del avatar con icono de usuario */
 .avatar-btn {
     background: var(--verde-suave);
     border: 1.5px solid var(--verde-claro);
@@ -61,10 +65,12 @@ body {
     transition: background 0.2s;
 }
 
+/* Efecto hover del botón de avatar */
 .avatar-btn:hover {
     background: var(--verde-claro);
 }
 
+/* Menú desplegable oculto por defecto que aparece bajo el avatar */
 .avatar-dropdown {
     display: none;
     position: absolute;
@@ -80,10 +86,12 @@ body {
     animation: aparece 0.2s ease;
 }
 
+/* Clase que activa la visibilidad del dropdown */
 .avatar-dropdown.abierto {
     display: block;
 }
 
+/* Nombre del usuario mostrado en la cabecera del dropdown */
 .avatar-dropdown .nombre-usuario {
     padding: 14px 18px 10px;
     font-size: 0.85rem;
@@ -91,6 +99,7 @@ body {
     border-bottom: 1px solid var(--borde);
 }
 
+/* Estilo de los enlaces dentro del dropdown */
 .avatar-dropdown a {
     display: block;
     padding: 12px 18px;
@@ -100,12 +109,14 @@ body {
     transition: background 0.15s;
 }
 
+/* Efecto hover de los enlaces del dropdown */
 .avatar-dropdown a:hover {
     background: var(--verde-suave);
     color: var(--marron-suave);
 }
 
-/* ===== CONTENIDO ===== */
+/*  CONTENIDO */
+/* Área principal centrada con padding y ancho máximo */
 .app-wrapper {
     flex: 1;
     padding: 36px 48px;
@@ -114,6 +125,7 @@ body {
     width: 100%;
 }
 
+/* Título de bienvenida con fuente serif */
 .bienvenida-titulo {
     font-family: 'Lora', serif;
     font-size: 1.8rem;
@@ -121,7 +133,8 @@ body {
     margin-bottom: 32px;
 }
 
-/* ===== ALERTAS ===== */
+/*  ALERTAS  */
+/* Alerta verde para mensajes de éxito */
 .alerta-success {
     background: #edf7ed;
     color: #2d6a2d;
@@ -132,6 +145,7 @@ body {
     margin-bottom: 24px;
 }
 
+/* Alerta roja para mensajes de error */
 .alerta-error {
     background: #fdecea;
     color: #c0392b;
@@ -142,7 +156,8 @@ body {
     margin-bottom: 24px;
 }
 
-/* ===== TABS ===== */
+/*  TABS  */
+/* Fila de pestañas de navegación con borde inferior */
 .tabs-nav {
     display: flex;
     gap: 4px;
@@ -150,6 +165,7 @@ body {
     margin-bottom: 36px;
 }
 
+/* Botón de pestaña inactiva */
 .tab-btn {
     padding: 10px 22px;
     border: none;
@@ -168,32 +184,38 @@ body {
     gap: 6px;
 }
 
+/* Efecto hover sobre botón de pestaña */
 .tab-btn:hover {
     color: var(--marron-suave);
     background: var(--verde-suave);
 }
 
+/* Pestaña actualmente seleccionada */
 .tab-btn.activo {
     color: var(--verde-pastel);
     border-bottom: 2px solid var(--verde-pastel);
     background: var(--verde-suave);
 }
 
+/* Panel de contenido de pestaña oculto por defecto */
 .tab-pane {
     display: none;
     animation: aparece 0.3s ease;
 }
 
+/* Panel de contenido de la pestaña activa */
 .tab-pane.activo {
     display: block;
 }
 
+/* Animación de entrada suave para tabs y modales */
 @keyframes aparece {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== PANEL INICIO ===== */
+/*  PANEL INICIO  */
+/* Rejilla de tres columnas para las tarjetas informativas del inicio */
 .inicio-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -201,6 +223,7 @@ body {
     margin-bottom: 32px;
 }
 
+/* Tarjeta individual del panel de inicio con efecto hover */
 .inicio-card {
     background: var(--blanco-roto);
     border: 1px solid var(--borde);
@@ -210,15 +233,18 @@ body {
     transition: transform 0.2s;
 }
 
+/* Elevación de la tarjeta al pasar el cursor */
 .inicio-card:hover {
     transform: translateY(-3px);
 }
 
+/* Icono grande en la parte superior de cada tarjeta */
 .inicio-card .card-icono {
     font-size: 2rem;
     margin-bottom: 12px;
 }
 
+/* Título de cada tarjeta del inicio */
 .inicio-card h4 {
     font-family: 'Lora', serif;
     font-size: 1rem;
@@ -226,12 +252,14 @@ body {
     margin-bottom: 6px;
 }
 
+/* Texto descriptivo de cada tarjeta del inicio */
 .inicio-card p {
     font-size: 0.85rem;
     color: #9b9088;
     line-height: 1.5;
 }
 
+/* Banner destacado con degradado verde en la parte inferior del inicio */
 .inicio-banner {
     background: linear-gradient(135deg, var(--verde-suave), var(--verde-claro));
     border: 1px solid var(--borde);
@@ -242,11 +270,13 @@ body {
     gap: 24px;
 }
 
+/* Icono grande a la izquierda del banner */
 .inicio-banner .banner-icono {
     font-size: 3rem;
     flex-shrink: 0;
 }
 
+/* Título del banner de bienvenida */
 .inicio-banner h3 {
     font-family: 'Lora', serif;
     font-size: 1.3rem;
@@ -254,13 +284,15 @@ body {
     margin-bottom: 6px;
 }
 
+/* Texto descriptivo del banner */
 .inicio-banner p {
     font-size: 0.9rem;
     color: #7a6e68;
     line-height: 1.6;
 }
 
-/* ===== FORMULARIOS ===== */
+/*  FORMULARIOS */
+/* Contenedor principal de cada sección de formulario */
 .form-seccion {
     background: var(--blanco-roto);
     border: 1px solid var(--borde);
@@ -269,6 +301,7 @@ body {
     box-shadow: var(--sombra);
 }
 
+/* Título de sección con línea separadora inferior */
 .form-seccion h4 {
     font-family: 'Lora', serif;
     font-size: 1.4rem;
@@ -278,6 +311,7 @@ body {
     border-bottom: 1px solid var(--borde);
 }
 
+/* Rejilla de dos columnas para campos de formulario */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -285,6 +319,7 @@ body {
     margin-bottom: 28px;
 }
 
+/* Rejilla de tres columnas para campos de formulario */
 .form-grid-3 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -292,6 +327,7 @@ body {
     margin-bottom: 28px;
 }
 
+/* Etiqueta en mayúsculas sobre cada campo del formulario */
 .campo label {
     display: block;
     font-size: 0.8rem;
@@ -302,6 +338,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Estilo base de los inputs de texto */
 .campo input {
     width: 100%;
     padding: 11px 16px;
@@ -315,12 +352,14 @@ body {
     outline: none;
 }
 
+/* Resaltado del input al recibir el foco */
 .campo input:focus {
     border-color: var(--verde-pastel);
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
     background: #fff;
 }
 
+/* Mensaje de error rojo bajo un campo inválido, oculto por defecto */
 .error-campo {
     color: #c0392b;
     font-size: 0.82rem;
@@ -328,12 +367,14 @@ body {
     display: none;
 }
 
+/* Línea horizontal separadora dentro de formularios */
 .form-separador {
     border: none;
     border-top: 1px solid var(--borde);
     margin: 28px 0;
 }
 
+/* Subtítulo secundario dentro de una sección de formulario */
 .form-subtitulo {
     font-family: 'Lora', serif;
     font-size: 1rem;
@@ -341,6 +382,7 @@ body {
     margin-bottom: 16px;
 }
 
+/* Contenedor que alinea el botón de envío a la derecha */
 .form-acciones {
     display: flex;
     justify-content: flex-end;
@@ -348,6 +390,7 @@ body {
 }
 
 /* BOTONES */
+/* Botón principal verde pastel para acciones confirmatorias */
 .btn-primario {
     padding: 11px 28px;
     background-color: var(--verde-pastel);
@@ -361,6 +404,7 @@ body {
     transition: background-color 0.2s, transform 0.1s;
 }
 
+/* Efecto hover del botón principal */
 .btn-primario:hover {
     background-color: #96b58e;
     transform: translateY(-1px);
@@ -379,6 +423,8 @@ body {
     cursor: pointer;
     transition: background-color 0.2s, transform 0.1s;
 }
+
+/* Efecto hover del botón de peligro */
 
 .btn-peligro:hover {
     background-color: #ad6259;
@@ -399,12 +445,14 @@ body {
     transition: background-color 0.2s, transform 0.1s;
 }
 
+/* Efecto hover del botón de peligro grave */
 .btn-peligro-grave:hover {
     background-color: #954f47;
     transform: translateY(-1px);
 }
 
 /* CÓDIGO GENERADO */
+/* Caja destacada que muestra el código de invitación generado */
 .codigo-generado-box {
     background: var(--verde-suave);
     border: 2px solid var(--verde-pastel);
@@ -413,12 +461,14 @@ body {
     margin-bottom: 32px;
 }
 
+/* Título de la caja del código generado */
 .codigo-generado-box h5 {
     font-family: 'Lora', serif;
     color: var(--marron-suave);
     margin-bottom: 12px;
 }
 
+/* Badge visual grande que muestra el código con letras espaciadas */
 .codigo-badge {
     display: inline-block;
     font-size: 1.8rem;
@@ -433,6 +483,7 @@ body {
 }
 
 /* MODAL */
+/* Fondo oscuro semitransparente que cubre toda la pantalla al abrir un modal */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -443,10 +494,12 @@ body {
     justify-content: center;
 }
 
+/* Clase que activa la visibilidad del modal con flex centrado */
 .modal-overlay.abierto {
     display: flex;
 }
 
+/* Caja blanca centrada con el contenido del modal */
 .modal-box {
     background: var(--blanco-roto);
     border-radius: 16px;
@@ -457,6 +510,7 @@ body {
     animation: aparece 0.25s ease;
 }
 
+/* Título del modal */
 .modal-box h5 {
     font-family: 'Lora', serif;
     font-size: 1.2rem;
@@ -464,6 +518,7 @@ body {
     margin-bottom: 12px;
 }
 
+/* Texto descriptivo del modal */
 .modal-box p {
     font-size: 0.92rem;
     color: var(--gris-texto);
@@ -471,12 +526,14 @@ body {
     line-height: 1.6;
 }
 
+/* Fila de botones del modal alineados a la derecha */
 .modal-acciones {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
 }
 
+/* Botón secundario transparente para cancelar acciones en modales */
 .btn-secundario {
     padding: 10px 20px;
     background: transparent;
@@ -490,11 +547,13 @@ body {
     transition: border-color 0.2s;
 }
 
+/* Efecto hover del botón secundario */
 .btn-secundario:hover {
     border-color: var(--verde-pastel);
 }
 
 /* FOOTER */
+/* Pie de página centrado con texto pequeño y línea superior */
 .footer-app {
     text-align: center;
     padding: 16px;

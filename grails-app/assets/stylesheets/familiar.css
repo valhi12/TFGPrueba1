@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;600&display=swap');
 
+/* Variables globales de colores, sombras y bordes reutilizables en toda la app */
 :root {
     --verde-pastel: #a8c5a0;
     --verde-claro: #c8dfc4;
@@ -12,6 +13,7 @@
     --borde: rgba(168, 197, 160, 0.3);
 }
 
+/* Reset general y fuente base del cuerpo */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -24,6 +26,7 @@ body {
 }
 
 /* PORTADA ÁLBUM */
+/* Cabecera del álbum con título, fecha e icono decorativo */
 .album-portada {
     background: var(--blanco-roto);
     border: 1px solid var(--borde);
@@ -36,6 +39,7 @@ body {
     margin-bottom: 32px;
 }
 
+/* Título principal del álbum */
 .album-portada-info h3 {
     font-family: 'Lora', serif;
     font-size: 1.5rem;
@@ -43,15 +47,18 @@ body {
     margin-bottom: 4px;
 }
 
+/* Texto secundario con la fecha de creación del álbum */
 .album-portada-info p {
     font-size: 0.85rem;
     color: #9b9088;
 }
 
+/* Icono decorativo grande a la derecha de la portada */
 .album-portada-icono {
     font-size: 3rem;
 }
 
+/* Botón lápiz para editar con estilo suave y efecto hover */
 .btn-lapiz {
     background: var(--verde-suave);
     border: 1.5px solid var(--borde);
@@ -69,12 +76,14 @@ body {
     font-weight: 600;
 }
 
+/* Efecto hover del botón lápiz */
 .btn-lapiz:hover {
     background: var(--verde-claro);
     border-color: var(--verde-pastel);
 }
 
 /* LISTA RECUERDOS */
+/* Columna vertical de tarjetas de recuerdos con separación uniforme */
 .recuerdos-lista {
     display: flex;
     flex-direction: column;
@@ -82,6 +91,7 @@ body {
     margin-top: 16px;
 }
 
+/* Tarjeta individual de recuerdo con foto, texto y acciones */
 .recuerdo-item {
     background: var(--blanco-roto);
     border: 1px solid var(--borde);
@@ -94,10 +104,12 @@ body {
     transition: transform 0.15s;
 }
 
+/* Elevación suave de la tarjeta al pasar el cursor */
 .recuerdo-item:hover {
     transform: translateY(-2px);
 }
 
+/* Miniatura cuadrada de la foto del recuerdo */
 .recuerdo-foto {
     width: 90px;
     height: 90px;
@@ -107,10 +119,12 @@ body {
     border: 2px solid var(--borde);
 }
 
+/* Área de texto central que ocupa el espacio disponible */
 .recuerdo-info {
     flex: 1;
 }
 
+/* Etiqueta de categoría en píldora verde sobre el texto del recuerdo */
 .recuerdo-info .etiqueta {
     display: inline-block;
     background: var(--verde-suave);
@@ -123,18 +137,21 @@ body {
     border: 1px solid var(--borde);
 }
 
+/* Fecha del recuerdo en texto pequeño y discreto */
 .recuerdo-info .fecha {
     font-size: 0.8rem;
     color: #9b9088;
     margin-bottom: 4px;
 }
 
+/* Descripción principal del recuerdo */
 .recuerdo-info .texto {
     font-size: 0.92rem;
     color: var(--gris-texto);
     line-height: 1.5;
 }
 
+/* Columna de botones de acción a la derecha de cada recuerdo */
 .recuerdo-acciones {
     display: flex;
     flex-direction: column;
@@ -142,6 +159,7 @@ body {
     flex-shrink: 0;
 }
 
+/* Botón de acción pequeño reutilizable para editar o eliminar */
 .btn-accion {
     background: var(--verde-suave);
     border: 1.5px solid var(--borde);
@@ -154,10 +172,12 @@ body {
     color: var(--gris-texto);
 }
 
+/* Efecto hover genérico del botón de acción */
 .btn-accion:hover {
     background: var(--verde-claro);
 }
 
+/* Efecto hover rojo específico del botón eliminar */
 .btn-accion.eliminar:hover {
     background: #fdecea;
     border-color: #f5c6c2;
@@ -165,6 +185,7 @@ body {
 }
 
 /* MODAL EDITAR */
+/* Fondo oscuro semitransparente que cubre la pantalla al editar un recuerdo */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -175,10 +196,12 @@ body {
     justify-content: center;
 }
 
+/* Clase que activa la visibilidad del modal con flex centrado */
 .modal-overlay.abierto {
     display: flex;
 }
 
+/* Caja blanca centrada con el formulario de edición del recuerdo */
 .modal-box {
     background: var(--blanco-roto);
     border-radius: 16px;
@@ -189,6 +212,7 @@ body {
     animation: aparece 0.25s ease;
 }
 
+/* Título del modal de edición */
 .modal-box h5 {
     font-family: 'Lora', serif;
     font-size: 1.2rem;
@@ -196,6 +220,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Fila de botones del modal alineados a la derecha */
 .modal-acciones {
     display: flex;
     justify-content: flex-end;
@@ -203,12 +228,14 @@ body {
     margin-top: 24px;
 }
 
+/* Animación de entrada suave para el modal */
 @keyframes aparece {
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
 /* AÑADIR RECUERDO */
+/* Formulario para añadir un nuevo recuerdo al álbum */
 .añadir-recuerdo-form {
     background: var(--blanco-roto);
     border: 1px solid var(--borde);
@@ -218,6 +245,7 @@ body {
     margin-top: 24px;
 }
 
+/* Título del formulario de añadir recuerdo */
 .añadir-recuerdo-form h5 {
     font-family: 'Lora', serif;
     font-size: 1.1rem;
@@ -225,6 +253,8 @@ body {
     margin-bottom: 20px;
 }
 
+/* ÁLBUM VACÍO  */
+/* Banner con degradado verde que se muestra cuando el álbum no tiene recuerdos */
 .album-vacio-card {
     background: linear-gradient(135deg, var(--verde-suave), var(--verde-claro));
     border: 1px solid var(--borde);
@@ -235,11 +265,13 @@ body {
     gap: 24px;
 }
 
+/* Icono decorativo grande a la izquierda del mensaje de álbum vacío */
 .album-vacio-icono {
     font-size: 3rem;
     flex-shrink: 0;
 }
 
+/* Título del mensaje de álbum vacío */
 .album-vacio-card h3 {
     font-family: 'Lora', serif;
     font-size: 1.3rem;
@@ -247,6 +279,7 @@ body {
     margin-bottom: 6px;
 }
 
+/* Texto descriptivo del mensaje de álbum vacío */
 .album-vacio-card p {
     font-size: 0.9rem;
     color: #7a6e68;

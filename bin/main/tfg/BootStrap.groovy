@@ -1,9 +1,13 @@
 package tfg
 
+//Clase de inicialización que se ejecuta automáticamente al arrancar la aplicación
+package tfg
+
 class BootStrap {
 
+//Closure que se ejecuta al iniciar la aplicación — aquí se prepara la base de datos
     def init = { servletContext ->
-        // Envolvemos todo en una transacción
+        //Envolvemos todo en una transacción para garantizar la integridad de los datos
         Usuario.withTransaction { status ->
             
             //Crear los 3 Roles si no existen
@@ -28,6 +32,7 @@ class BootStrap {
         }
     }
 
+    //Closure que se ejecuta al apagar la aplicación. Está vacío porque no se necesita limpieza
     def destroy = {
     }
 }
