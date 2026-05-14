@@ -34,6 +34,13 @@ class LoginController {
             return
         }
 
+        // Validación: el email del formulario debe coincidir con el emailFamiliar de la invitación
+        if (params.email?.toLowerCase()?.trim() != invitacion.emailFamiliar?.toLowerCase()?.trim()) {
+            flash.message = "El correo introducido no coincide con el asociado a este código de invitación."
+            redirect(action: 'registro')
+            return
+        }
+
         def user = new Usuario(
             username: params.email,
             password: new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode(params.password),
