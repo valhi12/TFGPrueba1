@@ -12,8 +12,10 @@
     --borde: rgba(168, 197, 160, 0.3);
 }
 
+/* Reset general de márgenes y modelo de caja */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Fondo crema y columna vertical que ocupa toda la pantalla */
 body {
     font-family: 'Nunito', sans-serif;
     background-color: var(--crema);
@@ -23,6 +25,8 @@ body {
     color: var(--gris-texto);
 }
 
+/*  LAYOUT PRINCIPAL  */
+/* Fila horizontal centrada con menú lateral izquierdo y contenido principal */
 .paciente-layout {
     display: flex;
     flex: 1;
@@ -35,12 +39,14 @@ body {
 }
 
 /* MENÚ ETIQUETAS */
+/* Panel lateral izquierdo con filtros de categorías de recuerdos */
 .etiquetas-menu {
     width: 180px;
     flex-shrink: 0;
     padding-top: 8px;
 }
 
+/* Título del panel lateral de etiquetas con línea separadora */
 .etiquetas-menu h4 {
     font-family: 'Lora', serif;
     font-size: 1rem;
@@ -50,6 +56,7 @@ body {
     border-bottom: 1px solid var(--borde);
 }
 
+/* Cada etiqueta del menú lateral como enlace con efecto hover */
 .etiqueta-item {
     display: block;
     padding: 10px 16px;
@@ -62,11 +69,13 @@ body {
     border: 1.5px solid transparent;
 }
 
+/* Efecto hover de las etiquetas del menú lateral */
 .etiqueta-item:hover {
     background: var(--verde-suave);
     color: var(--marron-suave);
 }
 
+/* Etiqueta actualmente seleccionada con borde verde y negrita */
 .etiqueta-item.activa {
     background: var(--verde-suave);
     border-color: var(--verde-pastel);
@@ -75,6 +84,7 @@ body {
 }
 
 /* CONTENIDO PRINCIPAL */
+/* Columna central que ocupa el espacio restante y centra su contenido */
 .paciente-contenido {
     flex: 1;
     display: flex;
@@ -84,6 +94,7 @@ body {
 }
 
 /* PORTADA */
+/* Tarjeta de portada del álbum con imagen y título centrados */
 .portada-card {
     background: var(--blanco-roto);
     border: 1px solid var(--borde);
@@ -96,16 +107,19 @@ body {
     animation: aparece 0.4s ease;
 }
 
+/* Imagen de portada que cubre todo el ancho de la tarjeta */
 .portada-card img {
     width: 100%;
     height: 420px;
     object-fit: cover;
 }
 
+/* Área de texto bajo la imagen de portada */
 .portada-card .portada-info {
     padding: 28px 32px 32px;
 }
 
+/* Título del álbum en la portada con fuente serif grande */
 .portada-card h2 {
     font-family: 'Lora', serif;
     font-size: 2rem;
@@ -113,6 +127,7 @@ body {
     margin-bottom: 10px;
 }
 
+/* Subtítulo descriptivo de la portada en color discreto */
 .portada-card p {
     font-size: 1rem;
     color: #9b9088;
@@ -120,6 +135,7 @@ body {
 }
 
 /* VISOR DE TARJETAS */
+/* Columna centrada que contiene el carrusel de tarjetas con flip */
 .visor-wrapper {
     width: 100%;
     max-width: 780px;
@@ -129,6 +145,7 @@ body {
     gap: 32px;
 }
 
+/* Fila de navegación con flechas a los lados y tarjeta en el centro */
 .visor-navegacion {
     display: flex;
     align-items: center;
@@ -137,6 +154,7 @@ body {
     justify-content: center;
 }
 
+/* Botón circular de flecha para navegar entre recuerdos */
 .btn-flecha {
     background: var(--blanco-roto);
     border: 2px solid var(--borde);
@@ -152,22 +170,26 @@ body {
     flex-shrink: 0;
 }
 
+/* Efecto hover de los botones de flecha */
 .btn-flecha:hover {
     background: var(--verde-suave);
     border-color: var(--verde-pastel);
 }
 
+/* Oculta la flecha cuando no hay más recuerdos en esa dirección */
 .btn-flecha:disabled {
     visibility: hidden;
 }
 
 /* TARJETA CON FLIP */
+/* Contenedor con perspectiva que define el espacio 3D del efecto flip */
 .tarjeta-container {
     width: 620px;
     height: 460px;
     perspective: 1000px;
 }
 
+/* Elemento interior que rota — contiene frente y dorso de la tarjeta */
 .tarjeta-inner {
     width: 100%;
     height: 100%;
@@ -176,10 +198,12 @@ body {
     transition: transform 0.6s ease;
 }
 
+/* Clase que activa la rotación de 180 grados para mostrar el dorso */
 .tarjeta-inner.girada {
     transform: rotateY(180deg);
 }
 
+/* Estilos comunes de las dos caras de la tarjeta */
 .tarjeta-cara {
     position: absolute;
     width: 100%;
@@ -191,17 +215,20 @@ body {
     box-shadow: var(--sombra);
 }
 
+/* Cara delantera de la tarjeta — muestra la foto del recuerdo */
 .tarjeta-frente {
     background: var(--blanco-roto);
     border: 1px solid var(--borde);
 }
 
+/* Imagen que cubre toda la cara delantera de la tarjeta */
 .tarjeta-frente img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+/* Cara trasera de la tarjeta — rotada 180° y centrada para mostrar el texto */
 .tarjeta-dorso {
     background: var(--blanco-roto);
     border: 1px solid var(--borde);
@@ -213,6 +240,7 @@ body {
     text-align: center;
 }
 
+/* Texto descriptivo del recuerdo en el dorso con fuente serif e itálica */
 .tarjeta-dorso .descripcion {
     font-size: 1.5rem;
     color: var(--gris-texto);
@@ -221,6 +249,7 @@ body {
     font-family: 'Lora', serif;
 }
 
+/* Fila inferior con el botón de voltear y el contador de recuerdos */
 .visor-acciones {
     display: flex;
     gap: 32px;
@@ -229,6 +258,7 @@ body {
     width: 100%;
 }
 
+/* Contador que muestra el número del recuerdo actual sobre el total */
 .contador {
     font-size: 1.1rem;
     color: #9b9088;
@@ -238,6 +268,7 @@ body {
 }
 
 /* BOTONES */
+/* Botón verde principal para voltear la tarjeta o iniciar el visor */
 .btn-verde {
     background-color: var(--verde-pastel);
     color: var(--blanco-roto);
@@ -251,11 +282,13 @@ body {
     transition: background-color 0.2s, transform 0.1s;
 }
 
+/* Efecto hover del botón verde principal */
 .btn-verde:hover {
     background-color: #96b58e;
     transform: translateY(-1px);
 }
 
+/* Botón secundario transparente para volver al panel del familiar */
 .btn-secundario-p {
     background: transparent;
     color: var(--marron-suave);
@@ -270,21 +303,26 @@ body {
     white-space: nowrap;
 }
 
+/* Efecto hover del botón secundario */
 .btn-secundario-p:hover {
     border-color: var(--verde-pastel);
 }
 
+/*  SIN ÁLBUM  */
+/* Mensaje centrado que se muestra cuando el paciente no tiene álbum creado */
 .sin-album {
     text-align: center;
     padding: 80px 20px;
     color: #9b9088;
 }
 
+/* Icono grande decorativo del mensaje de sin álbum */
 .sin-album .icono {
     font-size: 5rem;
     margin-bottom: 20px;
 }
 
+/* Título del mensaje de sin álbum */
 .sin-album h3 {
     font-family: 'Lora', serif;
     font-size: 1.5rem;
@@ -292,15 +330,18 @@ body {
     margin-bottom: 10px;
 }
 
+/* Texto descriptivo del mensaje de sin álbum */
 .sin-album p {
     font-size: 1rem;
 }
 
+/* Animación de entrada suave desde abajo para la portada y el visor */
 @keyframes aparece {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Pie de página centrado con texto pequeño y línea superior */
 .footer-app {
     text-align: center;
     padding: 16px;

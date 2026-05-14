@@ -11,12 +11,14 @@
     --sombra: 0 4px 24px rgba(100, 130, 100, 0.12);
 }
 
+/* Reset general de márgenes y modelo de caja */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Fondo crema con degradados radiales decorativos en las esquinas */
 body {
     font-family: 'Nunito', sans-serif;
     background-color: var(--crema);
@@ -30,6 +32,7 @@ body {
 }
 
 /* NAVBAR */
+/* Barra superior verde pastel con el nombre de la aplicación */
 .navbar-login {
     background-color: var(--verde-pastel);
     padding: 14px 28px;
@@ -38,6 +41,7 @@ body {
     box-shadow: 0 2px 8px rgba(100, 130, 100, 0.15);
 }
 
+/* Tipografía del nombre de la aplicación en la navbar */
 .navbar-login .marca {
     font-family: 'Lora', serif;
     font-size: 1.2rem;
@@ -46,6 +50,7 @@ body {
 }
 
 /* CONTENEDOR PRINCIPAL */
+/* Área centrada vertical y horizontalmente que envuelve la card de login */
 .login-wrapper {
     flex: 1;
     display: flex;
@@ -55,6 +60,7 @@ body {
 }
 
 /* CARD */
+/* Tarjeta blanca con bordes redondeados y animación de entrada */
 .login-card {
     background: var(--blanco-roto);
     border-radius: 20px;
@@ -66,12 +72,13 @@ body {
     animation: aparece 0.5s ease;
 }
 
+/* Animación de entrada suave desde abajo */
 @keyframes aparece {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 
-
+/* Título principal de la card de login */
 .login-card h2 {
     font-family: 'Lora', serif;
     font-size: 1.7rem;
@@ -80,6 +87,7 @@ body {
     margin-bottom: 6px;
 }
 
+/* Texto secundario descriptivo bajo el título */
 .login-card .subtitulo {
     text-align: center;
     color: #9b9088;
@@ -88,6 +96,7 @@ body {
 }
 
 /* LABELS E INPUTS */
+/* Etiquetas en mayúsculas sobre cada campo del formulario */
 .login-card label {
     display: block;
     font-size: 0.82rem;
@@ -98,6 +107,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Estilo base de los campos de texto, email y contraseña */
 .login-card input[type="email"],
 .login-card input[type="password"],
 .login-card input[type="text"] {
@@ -114,6 +124,7 @@ body {
     outline: none;
 }
 
+/* Resaltado del input al recibir el foco */
 .login-card input:focus {
     border-color: var(--verde-pastel);
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
@@ -121,6 +132,7 @@ body {
 }
 
 /* BOTÓN PRINCIPAL */
+/* Botón verde de ancho completo para enviar el formulario */
 .btn-verde {
     width: 100%;
     padding: 12px;
@@ -136,16 +148,19 @@ body {
     margin-top: 4px;
 }
 
+/* Efecto hover del botón verde */
 .btn-verde:hover {
     background-color: #96b58e;
     transform: translateY(-1px);
 }
 
+/* Efecto al hacer clic — vuelve a su posición original */
 .btn-verde:active {
     transform: translateY(0);
 }
 
 /* DIVISOR */
+/* Línea horizontal con texto central entre dos secciones */
 .divisor {
     display: flex;
     align-items: center;
@@ -155,6 +170,7 @@ body {
     font-size: 0.85rem;
 }
 
+/* Líneas decorativas a ambos lados del texto del divisor */
 .divisor::before,
 .divisor::after {
     content: '';
@@ -164,12 +180,14 @@ body {
 }
 
 /* ENLACE REGISTRO */
+/* Texto con enlace para ir a la pantalla de registro */
 .texto-registro {
     text-align: center;
     font-size: 0.9rem;
     color: #9b9088;
 }
 
+/* Enlace verde dentro del texto de registro */
 .texto-registro a {
     color: var(--verde-pastel);
     font-weight: 600;
@@ -177,11 +195,13 @@ body {
     transition: color 0.2s;
 }
 
+/* Efecto hover del enlace de registro */
 .texto-registro a:hover {
     color: #7aaa72;
 }
 
 /* ERROR */
+/* Caja roja que muestra mensajes de error del formulario */
 .alerta-error {
     background: #fdecea;
     color: #c0392b;
@@ -193,6 +213,7 @@ body {
 }
 
 /* FOOTER */
+/* Pie de página centrado con texto pequeño y discreto */
 .footer-login {
     text-align: center;
     padding: 16px;
@@ -201,7 +222,8 @@ body {
 }
 
 
-/* ===== CARD REGISTRO ===== */
+/*  CARD REGISTRO  */
+/* Tarjeta estrecha de registro con animación de entrada */
 .card-registro {
     background: var(--blanco-roto);
     border-radius: 20px;
@@ -214,6 +236,7 @@ body {
     animation: aparece 0.5s ease;
 }
 
+/* Título de la card de registro */
 .card-registro h2 {
     font-family: 'Lora', serif;
     color: var(--marron-suave);
@@ -221,6 +244,7 @@ body {
     margin-bottom: 6px;
 }
 
+/* Subtítulo descriptivo bajo el título de registro */
 .card-registro .subtitulo {
     text-align: center;
     color: #9b9088;
@@ -228,6 +252,7 @@ body {
     margin-bottom: 28px;
 }
 
+/* Etiquetas en mayúsculas de los campos del formulario de registro */
 .card-registro label {
     display: block;
     font-size: 0.82rem;
@@ -239,6 +264,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Estilo base de los inputs de la card de registro */
 .card-registro input[type="text"],
 .card-registro input[type="email"],
 .card-registro input[type="password"] {
@@ -254,12 +280,14 @@ body {
     outline: none;
 }
 
+/* Resaltado de los inputs al recibir el foco */
 .card-registro input:focus {
     border-color: var(--verde-pastel);
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
     background: #fff;
 }
 
+/* Opción seleccionable de tipo de registro (cuidador o familiar) */
 .card-registro .opcion-registro {
     border: 1.5px solid #dde8db;
     border-radius: 10px;
@@ -270,16 +298,19 @@ body {
     cursor: pointer;
 }
 
+/* Efecto hover sobre las opciones de tipo de registro */
 .card-registro .opcion-registro:hover {
     border-color: var(--verde-pastel);
 }
 
+/* Línea separadora horizontal dentro de la card de registro */
 .card-registro hr {
     border: none;
     border-top: 1px solid #e8e2db;
     margin: 24px 0;
 }
 
+/* Alerta de error dentro de la card de registro */
 .card-registro .alerta-error {
     background: #fdecea;
     color: #c0392b;
@@ -290,6 +321,7 @@ body {
     margin-bottom: 16px;
 }
 
+/* Mensaje de error rojo bajo un campo inválido, oculto por defecto */
 .card-registro .error-campo {
     color: #c0392b;
     font-size: 0.82rem;
@@ -298,6 +330,7 @@ body {
     display: none;
 }
 
+/* Caja verde que muestra el campo de código de invitación del familiar */
 .card-registro .div-codigo {
     margin-top: 15px;
     background: var(--verde-suave);
@@ -306,12 +339,14 @@ body {
     border-radius: 10px;
 }
 
+/* Texto de aceptación de términos y condiciones */
 .card-registro .terminos {
     margin-top: 20px;
     font-size: 0.9rem;
     color: var(--gris-texto);
 }
 
+/* Fila de botones de acción al pie del formulario de registro */
 .card-registro .acciones {
     margin-top: 24px;
     display: flex;
@@ -319,6 +354,7 @@ body {
     align-items: center;
 }
 
+/* Botón secundario transparente para cancelar o volver atrás */
 .btn-secundario {
     padding: 10px 18px;
     background: transparent;
@@ -333,11 +369,13 @@ body {
     transition: border-color 0.2s, color 0.2s;
 }
 
+/* Efecto hover del botón secundario */
 .btn-secundario:hover {
     border-color: var(--verde-pastel);
     color: var(--verde-pastel);
 }
 
+/* Botón primario verde para confirmar el registro */
 .btn-primario {
     padding: 10px 24px;
     background-color: var(--verde-pastel);
@@ -351,17 +389,20 @@ body {
     transition: background-color 0.2s, transform 0.1s;
 }
 
+/* Efecto hover del botón primario */
 .btn-primario:hover {
     background-color: #96b58e;
     transform: translateY(-1px);
 }
 
+/* Clase utilitaria para ocultar elementos con !important */
 .hidden {
     display: none !important;
 }
 
 
-/* ===== REGISTRO WIDE ===== */
+/*  REGISTRO WIDE */
+/* Contenedor centrado que envuelve la card de registro amplia */
 .registro-wrapper {
     flex: 1;
     display: flex;
@@ -370,6 +411,7 @@ body {
     padding: 40px 20px;
 }
 
+/* Tarjeta ancha de registro con dos columnas para formularios más completos */
 .card-registro-wide {
     background: var(--blanco-roto);
     border-radius: 20px;
@@ -381,12 +423,14 @@ body {
     animation: aparece 0.5s ease;
 }
 
+/* Cabecera de la card wide con título y línea separadora inferior */
 .registro-header {
     margin-bottom: 36px;
     border-bottom: 1px solid #e8e2db;
     padding-bottom: 24px;
 }
 
+/* Título grande de la cabecera del registro wide */
 .registro-header h2 {
     font-family: 'Lora', serif;
     font-size: 1.9rem;
@@ -394,11 +438,13 @@ body {
     margin-bottom: 4px;
 }
 
+/* Subtítulo descriptivo bajo el título del registro wide */
 .registro-header .subtitulo {
     color: #9b9088;
     font-size: 0.9rem;
 }
 
+/* Rejilla de dos columnas para los campos del registro wide */
 .registro-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -406,6 +452,7 @@ body {
     margin-bottom: 32px;
 }
 
+/* Etiqueta en mayúsculas sobre cada campo del registro wide */
 .campo label {
     display: block;
     font-size: 0.82rem;
@@ -416,6 +463,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Estilo base de los inputs del registro wide */
 .campo input {
     width: 100%;
     padding: 11px 16px;
@@ -429,16 +477,19 @@ body {
     outline: none;
 }
 
+/* Resaltado del input al recibir el foco en el registro wide */
 .campo input:focus {
     border-color: var(--verde-pastel);
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
     background: #fff;
 }
 
+/* Sección con margen inferior dentro del registro wide */
 .registro-seccion {
     margin-bottom: 32px;
 }
 
+/* Título de sección con fuente serif dentro del registro wide */
 .seccion-titulo {
     font-family: 'Lora', serif;
     font-size: 1rem;
@@ -446,6 +497,7 @@ body {
     margin-bottom: 14px;
 }
 
+/* Rejilla de dos columnas para las opciones de tipo de registro */
 .opciones-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -453,6 +505,7 @@ body {
     margin-bottom: 16px;
 }
 
+/* Pie del formulario wide con botones y términos separados por línea superior */
 .registro-footer {
     display: flex;
     justify-content: space-between;
@@ -463,12 +516,13 @@ body {
     gap: 16px;
 }
 
+/* Texto de aceptación de términos en el pie del registro wide */
 .terminos {
     font-size: 0.88rem;
     color: var(--gris-texto);
 }
 
-
+/* Caja verde que contiene el campo de código de invitación del familiar */
 .div-codigo {
     margin-top: 16px;
     background: var(--verde-suave);
@@ -477,6 +531,7 @@ body {
     border-radius: 10px;
 }
 
+/* Etiqueta en mayúsculas dentro de la caja del código de invitación */
 .div-codigo label {
     display: block;
     font-size: 0.82rem;
@@ -487,6 +542,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Input del código de invitación con fondo blanco */
 .div-codigo input {
     width: 100%;
     padding: 11px 16px;
@@ -500,12 +556,14 @@ body {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
+/* Resaltado del input del código al recibir el foco */
 .div-codigo input:focus {
     border-color: var(--verde-pastel);
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.25);
 }
 
-/* ===== SELECTOR AVATAR ===== */
+/*  SELECTOR AVATAR  */
+/* Fila de círculos de avatar seleccionables durante el registro */
 .avatar-selector {
     display: flex;
     gap: 12px;
@@ -513,14 +571,17 @@ body {
     margin-bottom: 8px;
 }
 
+/* Contenedor de cada opción de avatar con cursor pointer */
 .avatar-opcion {
     cursor: pointer;
 }
 
+/* Radio button oculto — la selección se gestiona visualmente con el círculo */
 .avatar-radio {
     display: none;
 }
 
+/* Círculo visual que representa cada opción de avatar */
 .avatar-circulo {
     display: flex;
     align-items: center;
@@ -534,17 +595,20 @@ body {
     transition: border-color 0.2s, background 0.2s, transform 0.15s;
 }
 
+/* Efecto hover — agranda ligeramente el avatar al pasar el cursor */
 .avatar-opcion:hover .avatar-circulo {
     border-color: var(--verde-pastel);
     transform: scale(1.08);
 }
 
+/* Estilo del avatar seleccionado — borde verde y fondo más oscuro */
 .avatar-radio:checked + .avatar-circulo {
     border-color: var(--verde-pastel);
     background: var(--verde-claro);
     box-shadow: 0 0 0 3px rgba(168, 197, 160, 0.3);
 }
 
+/* Mensaje de error rojo bajo un campo inválido, oculto por defecto */
 .error-campo {
     display: none;
     color: #c0392b;
