@@ -36,7 +36,7 @@ class LoginController {
 
         // Validación: el email del formulario debe coincidir con el emailFamiliar de la invitación
         if (params.email?.toLowerCase()?.trim() != invitacion.emailFamiliar?.toLowerCase()?.trim()) {
-            flash.message = "El correo introducido no coincide con el asociado a este código de invitación."
+            flash.message = "Error. El email debe ser el mismo que ha recibido el código."
             redirect(action: 'registro')
             return
         }

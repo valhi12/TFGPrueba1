@@ -89,6 +89,7 @@
                     <div id="divCodigo" class="div-codigo hidden">
                         <label>Introduce el Código Familiar</label>
                         <input type="text" id="inputCodigo" name="codigo" placeholder="Ej: ABC-1234"/>
+                        <p style="font-size:1em; color:#9b9088; margin-top:5px; margin-bottom:0;">⚠️ CUIDADO: El email con el que te registres debe ser el mismo que ha recibido el código.</p>
                     </div>
                 </div>
 

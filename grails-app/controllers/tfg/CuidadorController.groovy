@@ -42,6 +42,12 @@ class CuidadorController {
             Date fechaNac = null
             if (params.fechaNacimiento) {
                 fechaNac = new java.text.SimpleDateFormat('yyyy-MM-dd').parse(params.fechaNacimiento)
+                if (fechaNac.after(new Date())) {
+                    flash.error = "La fecha de nacimiento no puede ser posterior a la fecha actual."
+                    status.setRollbackOnly()
+                    redirect(controller: 'inicio', action: 'bienvenida')
+                    return
+                }
             }
 
             def paciente = new Paciente(

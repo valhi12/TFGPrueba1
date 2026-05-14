@@ -73,7 +73,7 @@
                             </div>
                             <div class="campo">
                                 <label>Fecha de nacimiento</label>
-                                <input type="date" name="fechaNacimiento"/>
+                                <input type="date" name="fechaNacimiento" max="${new java.text.SimpleDateFormat('yyyy-MM-dd').format(new Date())}"/>
                             </div>
                             <div class="campo">
                                 <label>Email</label>
@@ -164,7 +164,11 @@
                             <p class="form-subtitulo">Datos del familiar</p>
                             <div class="form-grid">
                                 <div class="campo"><label>Nombre completo</label><input type="text" name="nombreFamiliar" placeholder="Nombre y apellidos" required/></div>
-                                <div class="campo"><label>DNI</label><input type="text" name="dniFamiliar" placeholder="Ej: 12345678A" required/></div>
+                                <div class="campo">
+                                    <label>DNI</label>
+                                    <input type="text" name="dniFamiliar" id="dniFamiliar" placeholder="Ej: 12345678A" required/>
+                                    <div id="errorDniFamiliar" class="error-campo"></div>
+                                </div>
                                 <div class="campo"><label>Email</label><input type="text" name="emailFamiliar" placeholder="ejemplo@gmail.com" required/></div>
                                 <div class="campo">
                                     <label>Contraseña</label>
@@ -196,12 +200,7 @@
                             </div>
                             <hr class="form-separador"/>
                             <p class="form-subtitulo">Paciente a vincular</p>
-                            <div class="form-grid">
-                                <div class="campo">
-                                    <label>DNI del paciente</label>
-                                    <input type="text" name="dniPaciente" placeholder="DNI del paciente" required/>
-                                </div>
-                            </div>
+                            <div class="campo" style="max-width:calc(50% - 6px);"><label>DNI del paciente</label><input type="text" name="dniPaciente" id="dniPacienteVincular" placeholder="DNI del paciente" required/><div id="errorDniPacienteVincular" class="error-campo"></div></div>                            
                             <div class="form-acciones">
                                 <%-- type="button" para que pase por validarVincularFamiliar() antes de enviar --%>
                                 <button type="button" onclick="validarVincularFamiliar()" class="btn-primario">Generar Código</button>
@@ -475,6 +474,28 @@
     // ===== VALIDAR VINCULAR FAMILIAR =====
     function validarVincularFamiliar() {
         let valido = true;
+
+        // Validar formato DNI familiar (8 números + 1 letra)
+        const dniFamiliar = document.getElementById('dniFamiliar').value.trim();
+        const errorDniFamiliar = document.getElementById('errorDniFamiliar');
+        if (!/^\d{8}[A-Za-z]$/.test(dniFamiliar)) {
+            errorDniFamiliar.textContent = 'DNI inválido. Formato esperado: 12345678A';
+            errorDniFamiliar.style.display = 'block';
+            valido = false;
+        } else {
+            errorDniFamiliar.style.display = 'none';
+        }
+
+        // Validar formato DNI paciente (8 números + 1 letra)
+        const dniPaciente = document.getElementById('dniPacienteVincular').value.trim();
+        const errorDniPaciente = document.getElementById('errorDniPacienteVincular');
+        if (!/^\d{8}[A-Za-z]$/.test(dniPaciente)) {
+            errorDniPaciente.textContent = 'DNI inválido. Formato esperado: 12345678A';
+            errorDniPaciente.style.display = 'block';
+            valido = false;
+        } else {
+            errorDniPaciente.style.display = 'none';
+        }
 
         const pass1 = document.getElementById('passwordFamiliar').value;
         const pass2 = document.getElementById('passwordFamiliar2').value;
